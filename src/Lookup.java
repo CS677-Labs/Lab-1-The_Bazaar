@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
-public class lookup {
+public class Lookup {
 	private Boolean isSeller = false;
 	private String my_item;
 	private int nodeId;
 	
 	
 	
-	public lookup (int ID)
+	public Lookup (int ID)
 	{
 		nodeId = ID;
 	}

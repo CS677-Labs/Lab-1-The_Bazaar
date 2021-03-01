@@ -1,6 +1,11 @@
 import java.util.concurrent.Semaphore;
 // TODO: Test
-
+// TODO: refill when one item is over
+/**
+ * Each seller picks one of three items to sell.
+ * Each buyer randomly picks an item and attempts to purchase it; it then waits a random amount of time, then picks another item to buy and so on.
+ * Each seller starts with m items (e.g., m boars) to sell; upon selling all m items, the seller picks another item at random and becomes a seller of that item.
+ */
 public class Seller {
     private final Semaphore semaphore;
     public String productName;

@@ -15,7 +15,7 @@ public class RPCServer {
 
         // Todo: @Adarsh implements Lookup class
         phm.addHandler("Lookup", Lookup.class);
-        phm.addHandler("Buy", Buy.class);
+        phm.addHandler("Buy", Seller.class);
         // Todo: @brinda implements Buy class
 
         xmlRpcServer.setHandlerMapping(phm);

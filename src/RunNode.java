@@ -31,14 +31,14 @@ public class RunNode {
                  max_hop = Integer.parseInt(argv[3]);
             }
 
-            Lookup l = new Lookup(id);
+            Lookup l = new Lookup();
             ArrayList<Reply> ids = l.lookup(product_name, max_hop);
             Buyer buyer = new Buyer(id);
             buyer.buyProduct(ids);
         }
         else if (mode.equals("--seller")) {
             int port = new URL(Nodes.nodes.get(id)).getPort();
-            RPCServer server = new RPCServer(port, product_name);
+            RPCServer server = new RPCServer(port, product_name, id);
             server.start();
             System.out.printf("RPC Server started at port %d%n", port);
         }

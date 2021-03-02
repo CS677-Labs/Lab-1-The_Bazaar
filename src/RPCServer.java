@@ -7,11 +7,13 @@ import org.apache.xmlrpc.webserver.WebServer;
 public class RPCServer {
     WebServer webServer;
     public static String productName;
+    public static Integer ID;
     int port;
-    public RPCServer(int port, String productName) throws XmlRpcException{
+    public RPCServer(int port, String productName, int id) throws XmlRpcException{
         this.webServer = new WebServer(port);
         this.port = port;
         RPCServer.productName = productName;
+        RPCServer.ID = id;
         XmlRpcServer xmlRpcServer = webServer.getXmlRpcServer();
         PropertyHandlerMapping phm = new PropertyHandlerMapping();
         phm.addHandler("Lookup", Lookup.class);

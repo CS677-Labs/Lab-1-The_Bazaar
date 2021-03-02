@@ -4,9 +4,7 @@ public class Lookup {
 	private Boolean isSeller = false;
 	private String my_item;
 	private int nodeId;
-	
-	
-	
+
 	public Lookup (int ID)
 	{
 		nodeId = ID;
@@ -25,7 +23,7 @@ public class Lookup {
 	
 	
 	
-	public ArrayList<Reply> Lookup(String itemName, int maxHopCount)
+	public ArrayList<Reply> lookup(String itemName, int maxHopCount)
 	{
 		ArrayList<Reply> replies = new ArrayList<Reply>();
 		

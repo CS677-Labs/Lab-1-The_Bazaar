@@ -1,16 +1,14 @@
 import java.net.URL;
-        import java.util.*;
-
-        import org.apache.xmlrpc.XmlRpcException;
-        import org.apache.xmlrpc.client.*;
+import java.util.*;
+import org.apache.xmlrpc.XmlRpcException;
+import org.apache.xmlrpc.client.*;
 
 public class RPCClient {
     XmlRpcClient client;
     public RPCClient(int id) {
         try {
             XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-            // Todo: Vignesh implements this function that fetches the url from config file
-            String url = this.get_url_from_config(id);
+            String url = Nodes.nodes.get(id);
             config.setServerURL(new URL(url));
             this.client = new XmlRpcClient();
             this.client.setConfig(config);
@@ -21,13 +19,12 @@ public class RPCClient {
     }
     public ArrayList<Integer> lookUp(String product_name, int hop_max) throws XmlRpcException {
         Object[] params = new Object[]{product_name, hop_max};
-        ArrayList<Integer> result = (ArrayList<Integer>) this.client.execute("Server.lookUp", params);
+        ArrayList<Integer> result = (ArrayList<Integer>) this.client.execute("Lookup.lookup", params);
         return result;
     }
-    public boolean buy(int id) throws XmlRpcException{
-        Object[] params = new Object[]{id};
-        boolean success = (boolean) this.client.execute("Server.buy", params);
-        return success;
+    public boolean buy() throws XmlRpcException{
+        Object[] params = new Object[]{};
+        return (boolean) this.client.execute("Seller.sellProduct", params);
     }
 
 }

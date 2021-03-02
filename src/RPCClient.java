@@ -24,7 +24,7 @@ public class RPCClient {
     }
     public boolean buy() throws XmlRpcException{
         Object[] params = new Object[]{};
-        return (boolean) this.client.execute("Seller.sell", params);
+        return (boolean) this.client.execute("Seller.sellProduct", params);
     }
 
 }

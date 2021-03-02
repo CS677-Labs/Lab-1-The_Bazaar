@@ -3,10 +3,13 @@ import org.apache.xmlrpc.XmlRpcException;
 import java.util.ArrayList;
 import java.util.Random;
 
-// TODO: Test
+// TODO Test
 
 public class Buyer {
     public int nodeId;
+    // TODO Fetch from a config file
+    private static final String[] products = new String[]{"Fish", "Boar", "Salt"};
+
     public Buyer(int nodeId)
     {
         this.nodeId = nodeId;
@@ -27,4 +30,11 @@ public class Buyer {
         RPCClient sellerNode = new RPCClient(sellerId);
         sellerNode.buy();
     }
+    // TODO Each buyer randomly picks an item and attempts to purchase it; it then waits a random amount of time, then picks another item to buy and so on.
+    private String pickProduct()
+    {
+        Random random = new Random();
+        return products[random.nextInt(products.length)];
+    }
+
 }

@@ -19,6 +19,7 @@ public class Seller {
     }
 
     private boolean sellProduct() {
+        // Todo:  Restock with a random product from the list of products when we get out of stock.
         boolean bought = false;
         try {
             this.semaphore.acquire();

@@ -30,7 +30,7 @@ public class RunNode {
             if (argv.length > 3){
                  max_hop = Integer.parseInt(argv[3]);
             }
-
+            // Todo: Recurrent buys for random products
             Lookup l = new Lookup(id);
             ArrayList<Reply> ids = l.lookup(product_name, max_hop);
             Buyer buyer = new Buyer(id);

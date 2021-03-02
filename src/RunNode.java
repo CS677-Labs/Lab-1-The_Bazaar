@@ -13,7 +13,8 @@ public class RunNode {
         String mode = argv[0];
         int id = Integer.parseInt(argv[1]);
         String product_name = argv[2];
-        try (InputStream input = new FileInputStream("src/config.properties")) {
+        String pathToConfigFile = argv[3];
+        try (InputStream input = new FileInputStream(pathToConfigFile)) {
             prop = new Properties();
             // load a properties file
             prop.load(input);
@@ -27,11 +28,11 @@ public class RunNode {
         }
         if (mode.equals("--buyer")){
             int max_hop = 1;
-            if (argv.length > 3){
-                 max_hop = Integer.parseInt(argv[3]);
+            if (argv.length > 4){
+                 max_hop = Integer.parseInt(argv[4]);
             }
 
-            Lookup l = new Lookup();
+            Lookup l = new Lookup(id);
             ArrayList<Reply> ids = l.lookup(product_name, max_hop);
             Buyer buyer = new Buyer(id);
             buyer.buyProduct(ids);

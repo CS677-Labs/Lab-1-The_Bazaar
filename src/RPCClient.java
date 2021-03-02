@@ -17,9 +17,9 @@ public class RPCClient {
             System.err.println("JavaClient: " + exception);
         }
     }
-    public ArrayList<Integer> lookUp(String product_name, int hop_max) throws XmlRpcException {
+    public ArrayList<Reply> lookUp(String product_name, int hop_max) throws XmlRpcException {
         Object[] params = new Object[]{product_name, hop_max};
-        ArrayList<Integer> result = (ArrayList<Integer>) this.client.execute("Lookup.lookup", params);
+        ArrayList<Reply> result = (ArrayList<Reply>) this.client.execute("Lookup.lookup", params);
         return result;
     }
     public boolean buy() throws XmlRpcException{

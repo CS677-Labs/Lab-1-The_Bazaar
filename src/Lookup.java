@@ -1,81 +1,61 @@
 import java.util.ArrayList;
+import org.apache.xmlrpc.XmlRpcException;
 
 public class Lookup {
-	private Boolean isSeller = false;
-	private String my_item;
-	private int nodeId;
+	Integer nodeId;
 
-	public Lookup (int ID)
-	{
+	/*
+	 * WARNING :
+	 * Default constructor to be called only on the RPCServer.
+	 */
+	public Lookup() {
+		nodeId = RPCServer.ID;
+	}
+
+	public Lookup(Integer ID) {
 		nodeId = ID;
 	}
-	
-	
-	
+
+
 	/*
 	 * Function to fetch K neighbors for a node.
 	 * Function will ensure that it returns only the nodes that haven't been visited.
+	 *
+	 * Current implementation assumes only N=2 and K=1.
+	 * To be enhanced after Milestone 1
 	 */
-	public ArrayList<Integer> GetKNeighbors()
-	{
-		return new ArrayList<Integer>();
+	public ArrayList<Integer> GetKNeighbors() {
+		ArrayList<Integer> neighbors = new ArrayList<Integer>();
+		Integer neighborId;
+		if(nodeId == 0)
+			neighborId = 1;
+		else
+			neighborId = 0;
+
+		neighbors.add(neighborId);
+		return neighbors;
 	}
-	
-	
-	
-	public ArrayList<Reply> lookup(String itemName, int maxHopCount)
-	{
+
+	public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws XmlRpcException {
 		ArrayList<Reply> replies = new ArrayList<Reply>();
-		
+
 		/*
-		 * If this node is a seller :
-		 * 		Check if the item being sold matches to the one being requested.
-		 * 		If yes, add the details of this node to "replies".
+		 * 	Check if the item being sold matches to the one requested.
+		 * 	If yes, add the details of this node to "replies".
 		 */
-		if(isSeller)
-		{
-			if(itemName.equals(my_item))
-			{
-				Reply currNode = new Reply(nodeId);
-				replies.add(currNode);
+		if (itemName.equals(RPCServer.productName)) {
+			Reply currNode = new Reply(nodeId);
+			replies.add(currNode);
+		}
+		else if(maxHopCount > 0){
+			/*
+			 * Fetch the neighbors and invoke lookup for all the neighbors.
+			 */
+			for (Integer ID : GetKNeighbors()) {
+				RPCClient neighbor = new RPCClient(ID);
+				replies.addAll(neighbor.lookUp(itemName, maxHopCount - 1));
 			}
 		}
-		
-		/*
-		 * Fetch the neighbors and invoke lookup for all the neighbors.
-		 */
-		for (Integer ID : GetKNeighbors())
-		{
-			/*
-			 * RPC -- To be implemented.
-			 *
-			RPCInterface rpc = new RPCInterface(ID);
-			replies.addAll(rpc.invokeLookup());
-			*/
-		}
-		
 		return replies;
-	}
-	
-	
-	
-	/*
-	 * Setter method to set the item that the current node may be selling
-	 */
-	public void SetSellerItem(String item)
-	{
-		isSeller = true;
-		my_item = item;
-	}
-	
-	
-	
-	/*
-	 * Method to indicate that the current node will not be a seller anymore.
-	 */
-	public void UnsetSellerItem()
-	{
-		this.isSeller = false;
-		my_item = "";
 	}
 }

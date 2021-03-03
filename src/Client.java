@@ -40,14 +40,17 @@ public class Client {
                 e.printStackTrace();
                 throw e;
             }
-            Buyer buyer = new Buyer(id, productName);
-            Reply sellerPicked = buyer.pickSeller(replies);
-            boolean success = buyer.buy(sellerPicked.sellerId);
+            boolean success = false;
+            if(false == replies.isEmpty()) {
+                Buyer buyer = new Buyer(id, productName);
+                Reply sellerPicked = buyer.pickSeller(replies);
+                success = buyer.buy(sellerPicked.sellerId);
+            }
             if(success){
                 System.out.printf("Bought product %s\n", productName);
             }
             else{
-                System.out.printf("Failed to buy product %s", productName);
+                System.out.printf("Failed to buy product %s\n", productName);
             }
             try
             {

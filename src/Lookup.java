@@ -44,9 +44,16 @@ public class Lookup {
             replies.add(currNode);
 
         }
-        else if(maxHopCount > 0){
+        else if(this.productName.isEmpty() && maxHopCount > 0){
             /*
-             * Fetch the neighbors and invoke lookup for all the neighbors.
+             *  Fetch the neighbors and invoke lookup for all the neighbors.
+             *
+             *
+             *
+             *  Look for K neighbors only if the current node is not a seller node.
+             *  If the current node is a seller node (productName is not empty) do not forward the lookup requests.
+             *
+             *  Works only for N=2, K=1 case. Needs to be enhanced to handle advanced cases.
              */
             for (Integer ID : GetKNeighbors()) {
                 URL url = new URL(Nodes.nodes.get(ID));

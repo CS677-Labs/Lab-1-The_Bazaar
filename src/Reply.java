@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Reply {
+public class Reply implements Serializable {
 	public int sellerId;
 	public Reply(int ID)
 	{

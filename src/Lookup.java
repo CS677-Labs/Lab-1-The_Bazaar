@@ -36,7 +36,7 @@ public class Lookup {
 		return neighbors;
 	}
 
-	public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws Exception {
+	public Reply lookup(String itemName, int maxHopCount) throws Exception {
 		ArrayList<Reply> replies = new ArrayList<Reply>();
 
 		/*
@@ -53,9 +53,35 @@ public class Lookup {
 			 */
 			for (Integer ID : GetKNeighbors()) {
 				RPCClient neighbor = new RPCClient(ID);
+				replies.add(neighbor.lookUp(itemName, maxHopCount - 1));
+			}
+		}
+		return replies.get(0);
+	}
+
+	/*public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws Exception {
+		ArrayList<Reply> replies = new ArrayList<Reply>();
+
+		/*
+		 * 	Check if the item being sold matches to the one requested.
+		 * 	If yes, add the details of this node to "replies".
+		 */
+	/*
+		if (itemName.equals(RPCServer.productName)) {
+			Reply currNode = new Reply(nodeId);
+			replies.add(currNode);
+		}
+		else if(maxHopCount > 0){
+			/*
+			 * Fetch the neighbors and invoke lookup for all the neighbors.
+			 */
+	/*
+			for (Integer ID : GetKNeighbors()) {
+				RPCClient neighbor = new RPCClient(ID);
 				replies.addAll(neighbor.lookUp(itemName, maxHopCount - 1));
 			}
 		}
 		return replies;
 	}
+	*/
 }

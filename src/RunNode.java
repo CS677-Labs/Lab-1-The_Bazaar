@@ -32,13 +32,21 @@ public class RunNode {
                  max_hop = Integer.parseInt(argv[4]);
             }
 
-            Lookup l = new Lookup(id);
-            ArrayList<Reply> ids = l.lookup(product_name, max_hop);
-            Buyer buyer = new Buyer(id);
-            buyer.buyProduct(ids);
+            try {
+                Lookup l = new Lookup(id);
+                Reply ids = l.lookup(product_name, max_hop);
+                Buyer buyer = new Buyer(id);
+                ArrayList<Reply> sellers = new ArrayList<Reply>();
+                sellers.add(ids);
+                buyer.buyProduct(sellers, product_name);
+            }
+            catch (Exception E) {
+                System.out.println(E.toString());
+            }
         }
         else if (mode.equals("--seller")) {
             int port = new URL(Nodes.nodes.get(id)).getPort();
+            System.out.print(port);
             RPCServer server = new RPCServer(port, product_name, id);
             server.start();
             System.out.printf("RPC Server started at port %d%n", port);

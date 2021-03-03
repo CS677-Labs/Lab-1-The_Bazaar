@@ -14,8 +14,6 @@ public class RPCClient {
             config.setConnectionTimeout(60 * 1000);
             config.setReplyTimeout(60 * 1000);
             this.client = new XmlRpcClient();
-            this.client.setTransportFactory(
-                    new XmlRpcCommonsTransportFactory(client));
             this.client.setConfig(config);
 
         } catch (Exception exception) {
@@ -23,13 +21,23 @@ public class RPCClient {
             throw exception;
         }
     }
-    public ArrayList<Reply> lookUp(String product_name, int hop_max) throws XmlRpcException {
+    public static List<?> convertObjectToList(Object obj) {
+        List<?> list = new ArrayList<>();
+        if (obj.getClass().isArray()) {
+            list = Arrays.asList((Object[])obj);
+        } else if (obj instanceof Collection) {
+            list = new ArrayList<>((Collection<?>)obj);
+        }
+        return list;
+    }
+    public Reply lookUp(String product_name, int hop_max) throws XmlRpcException {
         Object[] params = new Object[]{product_name, hop_max};
-        ArrayList<Reply> result = (ArrayList<Reply>) this.client.execute("Lookup.lookup", params);
+        Object obj = this.client.execute("Lookup.lookup", params);
+        Reply result = (Reply)(obj);
         return result;
     }
-    public boolean buy() throws XmlRpcException{
-        Object[] params = new Object[]{};
+    public boolean buy(String product_name) throws XmlRpcException{
+        Object[] params = new Object[]{product_name};
         return (boolean) this.client.execute("Seller.sellProduct", params);
     }
 

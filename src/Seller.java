@@ -11,18 +11,19 @@ import java.util.concurrent.Semaphore;
 
 public class Seller {
     // TODO Fetch from a config file
-    private static final String[] items = new String[]{"Fish", "Boar", "Salt"};
+    private static final String[] items = new String[]{"Fish"/*, "Boar", "Salt"*/};
     private final Semaphore semaphore;
     public String productName;
     public int nodeId;
-    public int productCount;
+    public static int productCount;
     //TODO Fetch from config file
     private final int maxProductCount = 50;
 
-    public Seller(String productName, int nodeId) {
+    public Seller() {
         this.semaphore = new Semaphore(1);
-        this.productName = productName;
-        this.nodeId = nodeId;
+        this.productName = RPCServer.productName;
+        this.nodeId = RPCServer.ID;
+        productCount = 10;
     }
 
     private void restock() {
@@ -31,9 +32,15 @@ public class Seller {
         this.productCount = this.maxProductCount;
     }
 
-    private boolean sellProduct(String productName) {
+    /*
+    sellProduct will be executed remotely using RPC.
+     */
+    public boolean sellProduct(String productName) {
         if (!productName.equals(this.productName))
             return false;
+
+        if (this.productCount == 0)
+            restock();
 
         boolean bought = false;
         try {
@@ -50,6 +57,8 @@ public class Seller {
         }
 
         this.semaphore.release();
+
+        System.out.println("Sold " + productName + ". " + productCount + " remaining.");
         return bought;
     }
 

@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public class RunNode {
 
-    public static void main (String[] argv) throws IOException, XmlRpcException {
+    public static void main (String[] argv) throws Exception {
         Properties prop;
         String mode = argv[0];
         int id = Integer.parseInt(argv[1]);

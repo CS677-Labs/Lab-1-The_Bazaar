@@ -21,12 +21,12 @@ public class Buyer {
         return replies.get(random.nextInt(replies.size()));
     }
 
-    public void buyProduct(ArrayList<Reply> replies) throws XmlRpcException
+    public void buyProduct(ArrayList<Reply> replies) throws Exception
     {
         Reply sellerPicked = pickSeller(replies);
         this.buy(sellerPicked.sellerId);
     }
-    private void buy(int sellerId) throws XmlRpcException {
+    private void buy(int sellerId) throws Exception {
         RPCClient sellerNode = new RPCClient(sellerId);
         sellerNode.buy();
     }

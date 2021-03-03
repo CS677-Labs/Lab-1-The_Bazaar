@@ -25,18 +25,18 @@ public class Lookup {
 	 * To be enhanced after Milestone 1
 	 */
 	public ArrayList<Integer> GetKNeighbors() {
-		ArrayList<Integer> neighbors = new ArrayList<Integer>();
+		ArrayList<Integer> neighbors = new ArrayList<>();
 		Integer neighborId;
-		if(nodeId == 0)
-			neighborId = 1;
+		if(nodeId == 1)
+			neighborId = 2;
 		else
-			neighborId = 0;
+			neighborId = 1;
 
 		neighbors.add(neighborId);
 		return neighbors;
 	}
 
-	public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws XmlRpcException {
+	public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws Exception {
 		ArrayList<Reply> replies = new ArrayList<Reply>();
 
 		/*

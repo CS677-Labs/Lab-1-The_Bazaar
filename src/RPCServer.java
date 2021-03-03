@@ -19,6 +19,11 @@ public class RPCServer {
         phm.addHandler("Lookup", Lookup.class);
         phm.addHandler("Seller", Seller.class);
         xmlRpcServer.setHandlerMapping(phm);
+        XmlRpcServerConfigImpl serverConfig =
+                (XmlRpcServerConfigImpl) xmlRpcServer.getConfig();
+        serverConfig.setEnabledForExtensions(true);
+        serverConfig.setContentLengthOptional(false);
+
     }
     public void start() throws IOException {
         try{

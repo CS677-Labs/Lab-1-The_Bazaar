@@ -1,5 +1,6 @@
-import org.apache.xmlrpc.XmlRpcException;
-
+import java.net.URL;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,34 +8,48 @@ import java.util.Random;
 
 public class Buyer {
     public int nodeId;
-    // TODO Fetch from a config file
-    private static final String[] products = new String[]{"Fish", "Boar", "Salt"};
+    public String productName;
+    private static String[] products;
 
-    public Buyer(int nodeId)
+    public Buyer(int nodeId, String productName)
     {
         this.nodeId = nodeId;
+        this.productName = productName;
     }
 
-    private Reply pickSeller(ArrayList<Reply> replies)
+    public Reply pickSeller(ArrayList<Reply> replies)
     {
         Random random = new Random();
         return replies.get(random.nextInt(replies.size()));
     }
 
-    public void buyProduct(ArrayList<Reply> replies) throws Exception
-    {
-        Reply sellerPicked = pickSeller(replies);
-        this.buy(sellerPicked.sellerId);
-    }
-    private void buy(int sellerId) throws Exception {
-        RPCClient sellerNode = new RPCClient(sellerId);
-        sellerNode.buy();
+//    public boolean buyProduct(ArrayList<Reply> replies) throws Exception
+//    {
+//        Reply sellerPicked = pickSeller(replies);
+//        this.buy(sellerPicked.sellerId);
+//    }
+    public boolean buy(int sellerId) throws Exception {
+        URL url = new URL(Nodes.nodes.get(sellerId));
+        try {
+            Registry registry = LocateRegistry.getRegistry(url.getHost(), url.getPort());
+            SellerNode sellerNode = (SellerNode) registry.lookup("SellerNode");
+            return sellerNode.sellProduct(this.productName);
+
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+        return false;
     }
     // TODO Each buyer randomly picks an item and attempts to purchase it; it then waits a random amount of time, then picks another item to buy and so on.
-    private String pickProduct()
+    public static String pickProduct()
     {
         Random random = new Random();
         return products[random.nextInt(products.length)];
+    }
+    public static void setProducts(String[] buyerProducts)
+    {
+       products = buyerProducts;
     }
 
 }

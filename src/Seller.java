@@ -10,47 +10,49 @@ import java.util.concurrent.Semaphore;
 // fixme What's restock forever? If you restock forever, the seller will never change the product right?
 
 public class Seller {
-    // TODO Fetch from a config file
-    private static final String[] items = new String[]{"Fish", "Boar", "Salt"};
-    private final Semaphore semaphore;
-    public String productName;
-    public int nodeId;
-    public int productCount;
-    //TODO Fetch from config file
-    private final int maxProductCount = 50;
+    private static String[] products;
+    private static final Semaphore semaphore = new Semaphore(1);;
+    private static final int maxProductCount = 10;
+    public static int productCount = maxProductCount;
+    public static String productName;
 
-    public Seller(String productName, int nodeId) {
-        this.semaphore = new Semaphore(1);
-        this.productName = productName;
-        this.nodeId = nodeId;
-    }
 
-    private void restock() {
+    private static void restock() {
         Random random = new Random();
-        this.productName = items[random.nextInt(items.length)];
-        this.productCount = this.maxProductCount;
+        productName = products[random.nextInt(products.length)];
+        productCount = maxProductCount;
     }
 
-    private boolean sellProduct(String productName) {
-        if (!productName.equals(this.productName))
+    public static boolean sellProduct(String itemName) {
+        if (!itemName.equals(productName))
             return false;
 
         boolean bought = false;
+
         try {
-            this.semaphore.acquire();
-            if (this.productCount >= 1) {
-                this.productCount -= 1;
+            semaphore.acquire();
+            System.out.printf("Acquired lock\n");
+            System.out.printf("Current count of product %s is %d\n", itemName, productCount);
+            if (productCount >= 1) {
+                productCount -= 1;
                 bought = true;
-                if (this.productCount == 0)
+                if (productCount == 0)
                     restock();
             }
+            System.out.printf("Count after buy is %d\n", productCount);
+
 
         } catch (InterruptedException exc) {
             exc.printStackTrace();
         }
 
-        this.semaphore.release();
+        semaphore.release();
         return bought;
+    }
+    public static void setProducts(String[] productsToSell)
+    {
+        products = productsToSell;
+        productName= products[0];
     }
 
 }

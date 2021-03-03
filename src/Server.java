@@ -6,23 +6,48 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
 public class Server implements SellerNode {
     public static  String productName;
     public static Integer ID;
+    public static Logger logger;
 
     public Server() {
     }
 
     public static void main(String[] args) throws Exception{
+        String pathToConfigFile;
+        String[] productsToSell;
+        try {
+            ID = Integer.parseInt(args[0]);
+            pathToConfigFile = args[1];
+            productsToSell = args[2].split(",");
+            Seller.maxProductCount = Integer.parseInt(args[3]);
+        }catch (Exception e){
+            System.err.println("Incorrect arguments. Usage java -c destination Server {id} {pathToConfig} {products to sell separated by ,} {maxCount}");
+            throw e;
+        }
 
-        ID = Integer.parseInt(args[0]);
-        String pathToConfigFile = args[1];
-        String[] productsToSell = args[2].split(",");
+        logger = Logger.getLogger("ServerLog");
+        FileHandler fh;
+        try {
+            // This block configure the logger with handler and formatter
+            fh = new FileHandler("server.log");
+            logger.addHandler(fh);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+            // the following statement is used to log any messages
+        } catch (SecurityException | IOException exception) {
+            exception.printStackTrace();
+        }
         Seller.setProducts(productsToSell);
         Properties prop;
         productName = Seller.productName;
+        // Read urls of all the nodes in my peer to peer network.
         try (InputStream input = new FileInputStream(pathToConfigFile)) {
             prop = new Properties();
             // load a properties file

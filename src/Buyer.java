@@ -4,8 +4,6 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Random;
 
-// TODO Test
-
 public class Buyer {
     public int nodeId;
     public String productName;
@@ -23,11 +21,6 @@ public class Buyer {
         return replies.get(random.nextInt(replies.size()));
     }
 
-//    public boolean buyProduct(ArrayList<Reply> replies) throws Exception
-//    {
-//        Reply sellerPicked = pickSeller(replies);
-//        this.buy(sellerPicked.sellerId);
-//    }
     public boolean buy(int sellerId) throws Exception {
         URL url = new URL(Nodes.nodes.get(sellerId));
         try {

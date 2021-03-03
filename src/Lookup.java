@@ -20,19 +20,21 @@ public class Lookup {
      * Current implementation assumes only N=2 and K=1.
      * To be enhanced after Milestone 1
      */
-    public ArrayList<Integer> GetKNeighbors() {
+    public ArrayList<Integer> GetKNeighbors(int requestID) {
         ArrayList<Integer> neighbors = new ArrayList<>();
         Integer neighborId;
+        // Todo: handle k neighbours criteria. How do you select k neighbours for unstructured peer to peer system?
         if(this.nodeId == 1)
             neighborId = 2;
         else
             neighborId = 1;
-
-        neighbors.add(neighborId);
+        if (requestID != neighborId){
+            neighbors.add(neighborId);
+        }
         return neighbors;
     }
 
-    public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws Exception {
+    public ArrayList<Reply> lookup(String itemName, int maxHopCount, int requestID) throws Exception {
         ArrayList<Reply> replies = new ArrayList<>();
 
         /*
@@ -48,19 +50,17 @@ public class Lookup {
             /*
              * Fetch the neighbors and invoke lookup for all the neighbors.
              */
-            for (Integer ID : GetKNeighbors()) {
+            for (Integer ID : GetKNeighbors(requestID)) {
                 URL url = new URL(Nodes.nodes.get(ID));
 
                 try {
                     Registry registry = LocateRegistry.getRegistry(url.getHost(), url.getPort());
                     SellerNode seller = (SellerNode) registry.lookup("SellerNode");
                     replies.addAll(seller.lookUp(itemName, maxHopCount-1));
-
                 } catch (Exception e) {
                     System.err.println("Client exception: " + e.toString());
                     throw e;
                 }
-
 
             }
         }

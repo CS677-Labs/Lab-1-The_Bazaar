@@ -20,7 +20,7 @@ mkdir classfiles
 java -d classfiles src/*.java
 ```
 
-Run seller (server)
+#### Run seller (server)
 ```shell
 java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server {id of the seller} {path to the config.properties file} {list of products to buy separated by ,}
 ```
@@ -29,7 +29,7 @@ Example
 java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server 1 src/config.properties Fish, Boar
 ```
 
-Run buyer (client)
+#### Run buyer (client)
 ```shell
 java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Client {id of the buyer} {path to the config.properties file} {list of products to buy separated by ,}
 ```

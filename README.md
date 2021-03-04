@@ -1,7 +1,7 @@
 # Lab 1 The Bazaar
 Unstructured Peer to Peer system for online bazaar
 
-# Team members: Vignesh Radhakrishna (vradhakrishn@umass.edu), Adarsh Kolya (akolya@umass.edu), Brinda Muralidhara (bmurulidhara@umass.edu)
+### Team members: Vignesh Radhakrishna (vradhakrishn@umass.edu), Adarsh Kolya (akolya@umass.edu), Brinda Muralidhara (bmurulidhara@umass.edu)
 
 ### Repo Structure
     - Server.java has the server side RMI setup code. 

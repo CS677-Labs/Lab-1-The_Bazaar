@@ -104,4 +104,6 @@ then
 else
     echo "Test case 3 Failed."
 fi
+
+echo "All tests passed"
 rm *.log.* >/dev/null 2>&1 || echo "No logs to delete"

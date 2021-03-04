@@ -39,3 +39,9 @@ Run buyer (client)
 ```shell
 java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Client 1 src/config.properties Fish
 ```
+
+### Run testcases for Milestone 1
+```shell
+chmod 744 test_cases.sh
+./test_cases.sh
+```

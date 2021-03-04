@@ -3,6 +3,9 @@ Unstructured Peer to Peer system for online bazaar
 
 **Team members**: Vignesh Radhakrishna (vradhakrishn@umass.edu), Adarsh Kolya (akolya@umass.edu), Brinda Muralidhara (bmurulidhara@umass.edu)
 
+- Milestone 1 - https://github.com/CS677-Labs/Lab-1-The_Bazaar/tree/milestone1
+- Milestone 2 - NA
+
 ### Repo Structure
     - Server.java has the server side RMI setup code. 
     - Seller.java has the logic for the Seller functionality. We need to first create an interface for the remote object, which is defined in SellerNode.java. The Server implements this interface using Lookup and Seller classes.

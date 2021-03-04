@@ -18,11 +18,13 @@ public class Client {
         int id = Integer.parseInt(args[0]);
         String configFilePath = args[1];
         String[] products = args[2].split(",");
+        System.setProperty("java.util.logging.SimpleFormatter.format",
+                "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
         logger = Logger.getLogger("ClientLog");
         FileHandler fh;
         try {
             // This block configure the logger with handler and formatter
-            fh = new FileHandler("client.log");
+            fh = new FileHandler("client.log", true);
             logger.addHandler(fh);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
@@ -75,7 +77,7 @@ public class Client {
                 }
             }
             else{
-                System.out.printf("Could not buy product %s because found no peers with that item\n", productName);
+                logger.info(String.format("Could not buy product %s because found no peers with that item\n", productName));
             }
             try
             {

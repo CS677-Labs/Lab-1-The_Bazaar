@@ -32,11 +32,15 @@ public class Server implements SellerNode {
             throw e;
         }
 
+
+        System.setProperty("java.util.logging.SimpleFormatter.format",
+                "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
+
         logger = Logger.getLogger("ServerLog");
         FileHandler fh;
         try {
             // This block configure the logger with handler and formatter
-            fh = new FileHandler("server.log");
+            fh = new FileHandler("server.log", true);
             logger.addHandler(fh);
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);

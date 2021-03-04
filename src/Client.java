@@ -60,15 +60,22 @@ public class Client {
             }
             List<Integer> idList = replies.stream().map(p -> p.sellerId).collect(Collectors.toList());
             logger.info(String.format("Obtained replies from nodes %s", idList.toString()));
-            Buyer buyer = new Buyer(id, productName);
-            Reply sellerPicked = buyer.pickSeller(replies);
-            logger.info(String.format("Randomly picking %d as the seller and contacting it directly.", sellerPicked.sellerId));
-            boolean success = buyer.buy(sellerPicked.sellerId);
-            if(success){
-                logger.info(String.format("Bought product %s from Peer ID %d", productName, sellerPicked.sellerId));
+
+            Reply sellerPicked;
+            if(!replies.isEmpty()) {
+                Buyer buyer = new Buyer(id, productName);
+                sellerPicked = buyer.pickSeller(replies);
+                logger.info(String.format("Randomly picking %d as the seller and contacting it directly.", sellerPicked.sellerId));
+                if(buyer.buy(sellerPicked.sellerId)){
+                    logger.info(String.format("Bought product %s from Peer ID %d\n", productName, sellerPicked.sellerId));
+                }
+                else{
+                    System.out.printf("Failed to buy product %s from Peer ID %d\n", productName, sellerPicked.sellerId);
+
+                }
             }
             else{
-                System.out.printf("Failed to buy product %s from Peer ID %d", productName, sellerPicked.sellerId);
+                System.out.printf("Could not buy product %s because found no peers with that item\n", productName);
             }
             try
             {

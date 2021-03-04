@@ -20,7 +20,7 @@ public class Lookup {
      * Current implementation assumes only N=2 and K=1.
      * To be enhanced after Milestone 1
      */
-    public ArrayList<Integer> GetKNeighbors(int requestID) {
+    public ArrayList<Integer> GetKNeighbors() {
         ArrayList<Integer> neighbors = new ArrayList<>();
         Integer neighborId;
         // Todo: handle k neighbours criteria. How do you select k neighbours for unstructured peer to peer system?
@@ -28,13 +28,11 @@ public class Lookup {
             neighborId = 2;
         else
             neighborId = 1;
-        if (requestID != neighborId){
-            neighbors.add(neighborId);
-        }
+        neighbors.add(neighborId);
         return neighbors;
     }
 
-    public ArrayList<Reply> lookup(String itemName, int maxHopCount, int requestID) throws Exception {
+    public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws Exception {
         ArrayList<Reply> replies = new ArrayList<>();
 
         /*
@@ -46,11 +44,18 @@ public class Lookup {
             replies.add(currNode);
 
         }
-        else if(maxHopCount > 0){
+        else if(this.productName.isEmpty() && maxHopCount > 0){
             /*
-             * Fetch the neighbors and invoke lookup for all the neighbors.
+             *  Fetch the neighbors and invoke lookup for all the neighbors.
+             *
+             *
+             *
+             *  Look for K neighbors only if the current node is not a seller node.
+             *  If the current node is a seller node (productName is not empty) do not forward the lookup requests.
+             *
+             *  Works only for N=2, K=1 case. Needs to be enhanced to handle advanced cases.
              */
-            for (Integer ID : GetKNeighbors(requestID)) {
+            for (Integer ID : GetKNeighbors()) {
                 URL url = new URL(Nodes.nodes.get(ID));
 
                 try {

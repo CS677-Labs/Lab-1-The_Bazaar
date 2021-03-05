@@ -5,18 +5,25 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Buyer {
+    private static String[] products;
     public int nodeId;
     public String productName;
-    private static String[] products;
 
-    public Buyer(int nodeId, String productName)
-    {
+    public Buyer(int nodeId, String productName) {
         this.nodeId = nodeId;
         this.productName = productName;
     }
 
-    public Reply pickSeller(ArrayList<Reply> replies)
-    {
+    public static String pickProduct() {
+        Random random = new Random();
+        return products[random.nextInt(products.length)];
+    }
+
+    public static void setProducts(String[] buyerProducts) {
+        products = buyerProducts;
+    }
+
+    public Reply pickSeller(ArrayList<Reply> replies) {
         Random random = new Random();
         return replies.get(random.nextInt(replies.size()));
     }
@@ -33,16 +40,6 @@ public class Buyer {
             e.printStackTrace();
         }
         return false;
-    }
-    // TODO Each buyer randomly picks an item and attempts to purchase it; it then waits a random amount of time, then picks another item to buy and so on.
-    public static String pickProduct()
-    {
-        Random random = new Random();
-        return products[random.nextInt(products.length)];
-    }
-    public static void setProducts(String[] buyerProducts)
-    {
-       products = buyerProducts;
     }
 
 }

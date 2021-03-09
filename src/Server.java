@@ -63,13 +63,16 @@ public class Server implements SellerNode {
             // load a properties file
             prop.load(input);
             for (Map.Entry<Object, Object> entry : prop.entrySet()) {
-                String value = (String)entry.getValue();
+                Integer key = Integer.parseInt((String) entry.getKey());
+                String value = (String) entry.getValue();
                 String[] URLandNeighbors = value.split(",");
-                Nodes.nodes.put(Integer.parseInt((String)entry.getKey()), URLandNeighbors[0]);
-                for(int i = 1; i < URLandNeighbors.length; i++)
-                    Nodes.neighbors.add(Integer.parseInt(URLandNeighbors[i]));
-            }
+                Nodes.nodes.put(key, URLandNeighbors[0]);
 
+                if (key == ID) {
+                    for (int i = 1; i < URLandNeighbors.length; i++)
+                        Nodes.neighbors.add(Integer.parseInt(URLandNeighbors[i]));
+                }
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
             throw ex;

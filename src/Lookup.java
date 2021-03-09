@@ -2,14 +2,20 @@ import java.net.URL;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.UUID;
 
 public class Lookup {
     Integer nodeId;
     String productName;
+    private static ArrayList<String> processedLookups;
 
     public Lookup(Integer ID, String productName) {
         this.nodeId = ID;
         this.productName = productName;
+
+        if(processedLookups == null)
+            processedLookups = new ArrayList<String>();
     }
 
 
@@ -33,7 +39,24 @@ public class Lookup {
     }
 
     public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws Exception {
+        /*
+         * Generate lookupId
+         */
+        String lookupId = UUID.randomUUID().toString();
+        /*
+         * Flood the lookup message
+         */
+        return floodLookUps(itemName, maxHopCount - 1, lookupId);
+    }
+
+    public ArrayList<Reply> floodLookUps(String itemName, int maxHopCount, String lookupId) throws Exception {
         ArrayList<Reply> replies = new ArrayList<>();
+
+        /*
+         * 	Check if the current transaction has already been processed in this node
+         */
+        if(processedLookups.contains(lookupId))
+            return replies;
 
         /*
          * 	Check if the item being sold matches to the one requested.
@@ -61,7 +84,7 @@ public class Lookup {
                 try {
                     Registry registry = LocateRegistry.getRegistry(url.getHost(), url.getPort());
                     SellerNode seller = (SellerNode) registry.lookup("SellerNode");
-                    replies.addAll(seller.lookUp(itemName, maxHopCount-1));
+                    replies.addAll(seller.floodLookUps(itemName, maxHopCount-1, lookupId));
                 } catch (Exception e) {
                     System.err.println("Client exception: " + e.toString());
                     throw e;
@@ -69,6 +92,8 @@ public class Lookup {
 
             }
         }
+
+        processedLookups.add(lookupId);
         return replies;
     }
 }

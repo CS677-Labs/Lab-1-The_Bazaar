@@ -80,12 +80,12 @@ public class Server implements SellerNode {
         }
     }
 
-    public ArrayList<Reply> lookUp(String itemName, int maxHopCount) {
+    public ArrayList<Reply> floodLookUps(String itemName, int maxHopCount, String lookupId) {
         System.out.printf("Looking up product %s\n", itemName);
         ArrayList<Reply> replies = new ArrayList<>();;
         Lookup lookup = new Lookup(ID, productName);
         try {
-            replies = lookup.lookup(itemName, maxHopCount);
+            replies = lookup.floodLookUps(itemName, maxHopCount, lookupId);
         }catch (Exception e){
             e.printStackTrace();
         }

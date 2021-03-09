@@ -2,20 +2,16 @@ import java.net.URL;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class Lookup {
     Integer nodeId;
     String productName;
-    private static ArrayList<String> processedLookups;
+    private static ArrayList<String> processedLookups = new ArrayList<>();
 
     public Lookup(Integer ID, String productName) {
         this.nodeId = ID;
         this.productName = productName;
-
-        if(processedLookups == null)
-            processedLookups = new ArrayList<String>();
     }
 
 
@@ -25,7 +21,7 @@ public class Lookup {
      *
      * Current implementation assumes only N=2 and K=1.
      * To be enhanced after Milestone 1
-     */
+     *
     public ArrayList<Integer> GetKNeighbors() {
         ArrayList<Integer> neighbors = new ArrayList<>();
         Integer neighborId;
@@ -37,6 +33,7 @@ public class Lookup {
         neighbors.add(neighborId);
         return neighbors;
     }
+    */
 
     public ArrayList<Reply> lookup(String itemName, int maxHopCount) throws Exception {
         /*
@@ -78,7 +75,7 @@ public class Lookup {
              *
              *  Works only for N=2, K=1 case. Needs to be enhanced to handle advanced cases.
              */
-            for (Integer ID : GetKNeighbors()) {
+            for (Integer ID : Nodes.neighbors) {
                 URL url = new URL(Nodes.nodes.get(ID));
 
                 try {

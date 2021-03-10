@@ -17,7 +17,9 @@ echo "Running test case 1 - Seller sells Fish, Buyer buys Fish."
 rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
 
 echo "Running the server as the seller of Fishes"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 src/config.properties Fish 5 &
+
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 src/config-milestone1.properties Fish 5 &
+
 server_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$server_id")
@@ -25,7 +27,8 @@ then
 	echo "Failed to start the seller node" && return 1
 fi
 echo "Running the client as a buyer of Fishes"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 src/config.properties Fish &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 src/config-milestone1.properties Fish &
+
 client_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$client_id")
@@ -49,7 +52,8 @@ sleep 2
 echo "Running test case 2. Seller sells only Boars. Buyer buys only Fishes"
 rm *.log*  >/dev/null 2>&1 || echo "No logs to delete"
 echo "Running the server as the seller of Boars"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 src/config.properties Boars 5 &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 src/config-milestone1.properties Boars 5 &
+
 server_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$server_id")
@@ -57,7 +61,8 @@ then
 	echo "Failed to start the seller node" && return 1
 fi
 echo "Running the client as a buyer of Fishes"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 src/config.properties Fish &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 src/config-milestone1.properties Fish &
+
 client_id=$!
 if ! (ps | grep "java" | grep "$client_id")
 then
@@ -87,7 +92,8 @@ else
 fi
 rm *.log*  >/dev/null 2>&1 || echo "No logs to delete"
 echo "Running Node $id as Seller of Fishes."
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server $id  src/config.properties Fish 5 &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server $id  src/config-milestone1.properties Fish 5 &
+
 server_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$server_id")
@@ -96,7 +102,8 @@ if ! (ps | grep "java" | grep "$server_id")
 fi
 
 echo "Running Node $id2 as a Buyer of Fishes."
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client $id2 src/config.properties Fish 5 &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client $id2 src/config-milestone1.properties Fish 5 &
+
 client_id=$!
 if ! (ps | grep "java" | grep "$client_id")
   then

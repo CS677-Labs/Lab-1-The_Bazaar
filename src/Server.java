@@ -22,13 +22,19 @@ public class Server implements SellerNode {
     public static void main(String[] args) throws Exception{
         String pathToConfigFile;
         String[] productsToSell;
+        String[] productsToRestock;
         try {
             ID = Integer.parseInt(args[0]);
             pathToConfigFile = args[1];
             productsToSell = args[2].split(",");
             Seller.maxProductCount = Integer.parseInt(args[3]);
+            if(args.length>=5)
+                productsToRestock = args[4].split(",");
+            else
+                productsToRestock = productsToSell;
+
         }catch (Exception e){
-            System.err.println("Incorrect arguments. Usage java -c destination Server {id} {pathToConfig} {products to sell separated by ,} {maxCount}");
+            System.err.println("Incorrect arguments. Usage java -c destination Server {id} {pathToConfig} {products to sell separated by ,} {maxCount} {[optional] products to restock separated by ,}");
             throw e;
         }
 
@@ -48,6 +54,7 @@ public class Server implements SellerNode {
             exception.printStackTrace();
         }
         Seller.setProducts(productsToSell);
+        Seller.setProductsToRestock(productsToRestock);
         Properties prop;
         productName = Seller.productName;
         // Read urls of all the nodes in my peer to peer network.

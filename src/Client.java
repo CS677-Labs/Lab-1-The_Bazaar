@@ -54,6 +54,8 @@ public class Client {
             ex.printStackTrace();
             throw ex;
         }
+        ServerThread serverThread = new ServerThread(id, 0, "");
+        serverThread.start();
         for (int i =0; i< 10; i++){
             String productName = Buyer.pickProduct();
 

@@ -11,7 +11,7 @@ Unstructured Peer to Peer system for online bazaar
     - Client.java has the client side code. This is basically getting command line arguments - nodeId and Path to the list of products for the buyer. The client then uses Lookup class and Buy class to make recurrrent requests to its neighbours with a random product everytime before sleeping for 2 seconds.
     - Lookup.java has the logic for the lookup functionality. // Todo: Elucidate more on this.
     - Buyer.java has the logic for the buyer functionality. // Todo: Elucidate more
-    - config.properties stores the mapping from ID and URL. This is passed as an argument to both the buyer and seller nodes.
+    - config.properties stores ID as key and a comma separated list of properties as value. The first property is the URL and the remaining properties are IDs of neighboring nodes. This file is passed as an argument to both the buyer and seller nodes. Note: In order to create a custom network, the user must specify the neighbor IDs for each node in the config.properties file. The two configuration files in the repository contain the network definitions for the first 2 milestones.
     - Nodes.java stores the static list of all the peers in the network. (k neighbours are picked from these).
     - Reply.java has the reply message class.
     - SellerNode.java is the interface for the remote object.
@@ -38,11 +38,11 @@ javac -d classfiles src/*.java
 
 #### Run seller (server)
 ```shell
-java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server {id of the seller} {path to the config.properties file} {list of products to buy separated by ,} <maxCount>
+java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server {id of the seller} {path to the config.properties file} {list of products to buy separated by ,} {maximum number of items of a particular product type} {[optional] list of products to restock separated by ,}
 ```
 Example
 ```shell
-java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server 1 src/config.properties Fish, Boar 5
+java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server 1 src/config.properties Fish, Boar 10 Fish
 ```
 
 #### Run buyer (client)

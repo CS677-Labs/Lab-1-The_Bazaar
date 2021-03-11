@@ -11,6 +11,7 @@ import java.util.concurrent.Semaphore;
 
 public class Seller {
     private static String[] products;
+    private static String[] productsToRestock;
     private static final Semaphore semaphore = new Semaphore(1);;
     public static int maxProductCount;
     public static int productCount;
@@ -19,7 +20,11 @@ public class Seller {
 
     private static void restock() {
         Random random = new Random();
-        productName = products[random.nextInt(products.length)];
+        productName = productsToRestock[random.nextInt(productsToRestock.length)];
+        productCount = maxProductCount;
+        Server.logger.info(String.format("Restocking the product with %s", productName));
+    }
+    private static void restock(String productName) {
         productCount = maxProductCount;
         Server.logger.info(String.format("Restocking the product with %s", productName));
     }
@@ -57,4 +62,8 @@ public class Seller {
         productCount = maxProductCount;
     }
 
+    public static void setProductsToRestock(String[] productList)
+    {
+        productsToRestock = productList;
+    }
 }

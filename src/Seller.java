@@ -1,13 +1,5 @@
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-// TODO: Test
-// TODO: refill when one item is over
-
-/**
- * Each seller picks one of three items to sell.
- * Each seller starts with m items (e.g., m boars) to sell; upon selling all m items, the seller picks another item at random and becomes a seller of that item.
- */
-// fixme What's restock forever? If you restock forever, the seller will never change the product right?
 
 public class Seller {
     private static String[] productsToRestock;
@@ -15,8 +7,12 @@ public class Seller {
     public static int maxProductCount;
     public static int productCount;
     public static String productName;
+    private static String[] products;
 
-
+    /**
+     * Each seller picks one of three items to sell.
+     * Each seller starts with m items (e.g., m boars) to sell; upon selling all m items, the seller picks another item at random and becomes a seller of that item.
+     */
     private static void restock() {
         Random random = new Random();
         productName = productsToRestock[random.nextInt(productsToRestock.length)];

@@ -52,6 +52,12 @@ public class Seller {
         return bought;
     }
 
+    public static void setProducts(String[] productsToSell)
+    {
+        productName= productsToSell[0];
+        productCount = maxProductCount;
+    }
+
     public static void setProductsToRestock(String[] productList)
     {
         productsToRestock = productList;

@@ -113,6 +113,7 @@ public class Server {
         } catch (SecurityException | IOException exception) {
             exception.printStackTrace();
         }
+        Seller.setProducts(productsToSell);
         Seller.setProductsToRestock(productsToRestock);
         Properties prop;
         // Read urls of all the nodes in my peer to peer network.

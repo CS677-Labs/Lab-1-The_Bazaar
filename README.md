@@ -38,11 +38,11 @@ javac -d classfiles src/*.java
 
 #### Run seller (server)
 ```shell
-java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server {id of the seller} {path to the config.properties file} {list of products to buy separated by ,}
+java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server {id of the seller} {path to the config.properties file} {list of products to buy separated by ,} <maxCount>
 ```
 Example
 ```shell
-java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server 1 src/config.properties Fish, Boar
+java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Server 1 src/config.properties Fish, Boar 5
 ```
 
 #### Run buyer (client)

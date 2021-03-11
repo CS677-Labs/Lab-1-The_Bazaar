@@ -109,7 +109,7 @@ if ! (ps | grep "java" | grep "$client_id")
   then
       echo "Failed to start the client node" && return 1
 fi
-sleep 10
+sleep 15
 if (grep -Fq "Bought product Fish" client.log) && (grep -Fq "Restocking" server.log)
 then
     echo "Test case 3 Passed."

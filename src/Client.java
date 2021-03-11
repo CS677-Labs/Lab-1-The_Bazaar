@@ -54,9 +54,19 @@ public class Client {
             ex.printStackTrace();
             throw ex;
         }
-        ServerThread serverThread = new ServerThread(id, 0, "");
+        ServerThread serverThread = new ServerThread(id);
         serverThread.start();
         for (int i =0; i< 10; i++){
+            try
+            {
+                Thread.sleep(2000);
+                System.out.println("Sleeping for two seconds......\n--------------------------");
+
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
             String productName = Buyer.pickProduct();
 
             System.out.printf("--------------------------------\nBuying product %s\n", productName);
@@ -88,16 +98,7 @@ public class Client {
             else{
                 logger.info(String.format("Could not buy product %s because found no peers with that item\n", productName));
             }
-            try
-            {
-                Thread.sleep(2000);
-                System.out.println("Sleeping for two seconds......\n--------------------------");
 
-            }
-            catch(InterruptedException ex)
-            {
-                Thread.currentThread().interrupt();
-            }
         }
 
     }

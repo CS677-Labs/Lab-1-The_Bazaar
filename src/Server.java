@@ -15,19 +15,15 @@ import java.util.logging.SimpleFormatter;
 class ServerThread implements Runnable {
     String url;
     int ID;
-    int productCount;
     Thread t;
-    String productName;
-    public ServerThread(int ID, int productCount, String productName){
+    public ServerThread(int ID){
             this.url = Nodes.nodes.get(ID);
             this.ID = ID;
-            this.productCount = productCount;
-            this.productName = productName;
     }
 
     @Override
     public void run() {
-        System.out.printf("Server running on url %s..", url);
+        System.out.printf("Node %d running as a Lookup server on url %s..\n", this.ID, url);
         int port;
         try {
             port = new URL(this.url).getPort();
@@ -41,9 +37,6 @@ class ServerThread implements Runnable {
 
             Registry registry = LocateRegistry.createRegistry(port);
             registry.bind("SellerNode", stub);
-
-            System.err.printf("Hi. I am Node %d, running on url %s. I got %d number of product %s to sell." +
-                    " Hit me up!\n", this.ID, this.url, this.productCount, this.productName);
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
@@ -152,7 +145,9 @@ public class Server {
             ex.printStackTrace();
             throw ex;
         }
-        ServerThread serverThread = new ServerThread(ID, Seller.maxProductCount, productName);
+        ServerThread serverThread = new ServerThread(ID);
         serverThread.start();
+        System.err.printf("Hi. I am node %d running as a seller. I got %d number of product %s to sell." +
+                " Hit me up!\n", ID, Seller.maxProductCount, productName);
     }
 }

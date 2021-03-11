@@ -75,6 +75,8 @@ public class Lookup {
                     replies.addAll(seller.floodLookUps(itemName, maxHopCount-1, lookupId));
                 } catch (Exception e) {
                     System.err.println("Client exception: " + e.toString());
+                    // Todo: Exception should be ungraceful exit.
+                    //  Else how would we differentiate between genuine items not found and server error?
                 }
 
             }

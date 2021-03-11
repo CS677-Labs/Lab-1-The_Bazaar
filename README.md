@@ -1,5 +1,10 @@
-# Lab-1-The_Bazaar
-Peer to Peer system for an online bazaar
+# Lab 1 The Bazaar
+Unstructured Peer to Peer system for online bazaar
+
+**Team members**: Vignesh Radhakrishna (32577580, vradhakrishn@umass.edu), Adarsh Kolya (33018261, akolya@umass.edu), Brinda Murulidhara (32578418, bmurulidhara@umass.edu)
+
+- Milestone 1 - https://github.com/CS677-Labs/Lab-1-The_Bazaar/tree/milestone1
+- Milestone 2 - NA
 
 ### Repo Structure
     - Server.java has the server side RMI setup code. 

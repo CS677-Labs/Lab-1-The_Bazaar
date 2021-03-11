@@ -22,7 +22,7 @@ Compile java files into bytecode
 ```shell
 cd Lab-1-The_Bazaar
 mkdir classfiles
-java -d classfiles src/*.java
+javac -d classfiles src/*.java
 ```
 
 #### Run seller (server)

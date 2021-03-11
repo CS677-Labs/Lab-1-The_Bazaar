@@ -2,7 +2,8 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class Seller {
-    private static final Semaphore semaphore = new Semaphore(1);
+    private static String[] productsToRestock;
+    private static final Semaphore semaphore = new Semaphore(1);;
     public static int maxProductCount;
     public static int productCount;
     public static String productName;
@@ -14,7 +15,7 @@ public class Seller {
      */
     private static void restock() {
         Random random = new Random();
-        productName = products[random.nextInt(products.length)];
+        productName = productsToRestock[random.nextInt(productsToRestock.length)];
         productCount = maxProductCount;
         Server.logger.info(String.format("Restocking the product with %s", productName));
     }
@@ -27,7 +28,7 @@ public class Seller {
 
         try {
             semaphore.acquire();
-            System.out.printf("Acquired lock\n");
+            System.out.printf("Acquired lock");
             System.out.printf("Current count of product %s is %d\n", itemName, productCount);
             if (productCount >= 1) {
                 productCount -= 1;
@@ -43,13 +44,18 @@ public class Seller {
         }
 
         semaphore.release();
+        System.out.printf("Released lock");
         return bought;
     }
 
-    public static void setProducts(String[] productsToSell) {
-        products = productsToSell;
-        productName = products[0];
+    public static void setProducts(String[] productsToSell)
+    {
+        productName= productsToSell[0];
         productCount = maxProductCount;
     }
 
+    public static void setProductsToRestock(String[] productList)
+    {
+        productsToRestock = productList;
+    }
 }

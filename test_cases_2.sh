@@ -5,7 +5,7 @@ function finish {
   echo "Cleanup"
   rm -rf classfiles
   kill $server_id $server_id_2 $client_id_1 $client_id_2 $client_id_3 >/dev/null 2>&1 || echo "No processes to delete."
-  rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
+#  rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
 }
 trap finish EXIT
 trap finish RETURN
@@ -77,7 +77,7 @@ javac -d classfiles src/*.java
 #
 # TODO add test case description
 echo "Running test case 2. <...>"
-rm *.log*  >/dev/null 2>&1 || echo "No logs to delete"
+#rm *.log*  >/dev/null 2>&1 || echo "No logs to delete"
 echo "Running 1 server as the seller of Boars"
 # fixme: Change this approach if required - "Switch to another product else it's always restocked and the second buyer will always have Boars available."
 java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 5 src/config-milestone2.properties Boar 1 Fish &

@@ -10,7 +10,6 @@ import java.util.concurrent.Semaphore;
 // fixme What's restock forever? If you restock forever, the seller will never change the product right?
 
 public class Seller {
-    private static String[] products;
     private static String[] productsToRestock;
     private static final Semaphore semaphore = new Semaphore(1);;
     public static int maxProductCount;
@@ -24,10 +23,6 @@ public class Seller {
         productCount = maxProductCount;
         Server.logger.info(String.format("Restocking the product with %s", productName));
     }
-    private static void restock(String productName) {
-        productCount = maxProductCount;
-        Server.logger.info(String.format("Restocking the product with %s", productName));
-    }
 
     public static boolean sellProduct(String itemName) {
         if (!itemName.equals(productName))
@@ -37,7 +32,7 @@ public class Seller {
 
         try {
             semaphore.acquire();
-            System.out.printf("Acquired lock\n");
+            System.out.printf("Acquired lock");
             System.out.printf("Current count of product %s is %d\n", itemName, productCount);
             if (productCount >= 1) {
                 productCount -= 1;
@@ -53,13 +48,8 @@ public class Seller {
         }
 
         semaphore.release();
+        System.out.printf("Released lock");
         return bought;
-    }
-    public static void setProducts(String[] productsToSell)
-    {
-        products = productsToSell;
-        productName= products[0];
-        productCount = maxProductCount;
     }
 
     public static void setProductsToRestock(String[] productList)

@@ -61,7 +61,7 @@ class ServerRMI implements SellerNode {
     public ArrayList<Reply> floodLookUps(String itemName, int maxHopCount, String lookupId) {
         System.out.printf("Looking up product %s\n", itemName);
         ArrayList<Reply> replies = new ArrayList<>();;
-        Lookup lookup = new Lookup(Server.ID, Server.productName);
+        Lookup lookup = new Lookup(Server.ID, Seller.productName);
         try {
             replies = lookup.floodLookUps(itemName, maxHopCount, lookupId);
         }catch (Exception e){
@@ -78,7 +78,6 @@ class ServerRMI implements SellerNode {
 
 public class Server {
     public static Logger logger;
-    public static String productName;
     public static Integer ID;
     public static void main(String[] args) throws Exception{
         String pathToConfigFile;
@@ -114,10 +113,8 @@ public class Server {
         } catch (SecurityException | IOException exception) {
             exception.printStackTrace();
         }
-        Seller.setProducts(productsToSell);
         Seller.setProductsToRestock(productsToRestock);
         Properties prop;
-        productName = Seller.productName;
         // Read urls of all the nodes in my peer to peer network.
         /*
          * Config file to have below structure
@@ -148,6 +145,6 @@ public class Server {
         ServerThread serverThread = new ServerThread(ID);
         serverThread.start();
         System.err.printf("Hi. I am node %d running as a seller. I got %d number of product %s to sell." +
-                " Hit me up!\n", ID, Seller.maxProductCount, productName);
+                " Hit me up!\n", ID, Seller.maxProductCount, Seller.productName);
     }
 }

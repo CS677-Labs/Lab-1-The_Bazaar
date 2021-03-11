@@ -70,7 +70,8 @@ public class Client {
             String productName = Buyer.pickProduct();
 
             System.out.printf("--------------------------------\nBuying product %s\n", productName);
-            // Passing productName as empty string because a buyer doesn't sell any product. Lookup is used by the server nodes too wher they pass the product name they sell to this.
+            // Passing productName as empty string because a buyer doesn't sell any product.
+            // Lookup is used by the server nodes too where they pass the product name they sell to this.
             Lookup lookup = new Lookup(id, "");
             ArrayList<Reply> replies;
             try{

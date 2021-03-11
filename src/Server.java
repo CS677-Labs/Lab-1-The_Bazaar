@@ -41,7 +41,7 @@ public class Server implements SellerNode {
             // This block configure the logger with handler and formatter
             fh = new FileHandler("server.log", true);
             logger.addHandler(fh);
-            SimpleFormatter formatter = new SimpleFormatter();
+            MyLogFormatter formatter = new MyLogFormatter(ID);
             fh.setFormatter(formatter);
             // the following statement is used to log any messages
         } catch (SecurityException | IOException exception) {
@@ -95,7 +95,7 @@ public class Server implements SellerNode {
 
     public ArrayList<Reply> floodLookUps(String itemName, int maxHopCount, String lookupId) {
         System.out.printf("Looking up product %s\n", itemName);
-        ArrayList<Reply> replies = new ArrayList<>();;
+        ArrayList<Reply> replies = new ArrayList<>();
         Lookup lookup = new Lookup(ID, productName);
         try {
             replies = lookup.floodLookUps(itemName, maxHopCount, lookupId);

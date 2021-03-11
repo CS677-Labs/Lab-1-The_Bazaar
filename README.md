@@ -4,8 +4,8 @@ Unstructured Peer to Peer system for online bazaar
 **Team members**: Vignesh Radhakrishna (32577580, vradhakrishn@umass.edu), Adarsh Kolya (33018261, akolya@umass.edu), Brinda Murulidhara (32578418, bmurulidhara@umass.edu)
 
 - Milestone 1 - https://github.com/CS677-Labs/Lab-1-The_Bazaar/tree/milestone1
-- Milestone 2 - NA
-
+- Milestone 2 - main branch
+- 
 ### Repo Structure
     - Server.java has the server side RMI setup code. 
     - Seller.java has the logic for the Seller functionality. We need to first create an interface for the remote object, which is defined in SellerNode.java. The Server implements this interface using Lookup and Seller classes.
@@ -16,6 +16,18 @@ Unstructured Peer to Peer system for online bazaar
     - Nodes.java stores the static list of all the peers in the network. (k neighbours are picked from these).
     - Reply.java has the reply message class.
     - SellerNode.java is the interface for the remote object.
+
+### Run testcases for Milestone 1
+```shell
+chmod 744 test_cases.sh
+./test_cases.sh
+```
+
+### Run testcases for Milestone 2
+```shell
+chmod 744 test_cases_2.sh
+./test_cases_2.sh
+```
 
 ### Usage
 Compile java files into bytecode
@@ -43,10 +55,4 @@ Example
 Run buyer (client)
 ```shell
 java -classpath classfiles -Djava.rmi.server.codebase=file:files/ Client 1 src/config.properties Fish
-```
-
-### Run testcases for Milestone 1
-```shell
-chmod 744 test_cases.sh
-./test_cases.sh
 ```

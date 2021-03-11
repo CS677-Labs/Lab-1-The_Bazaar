@@ -18,20 +18,20 @@ rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
 
 echo "Running the server as the seller of Fishes"
 
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 src/config-milestone1.properties Fish 5 &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
 
 server_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$server_id")
+if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
 echo "Running the client as a buyer of Fishes"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 src/config-milestone1.properties Fish &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 src/config-milestone1.properties Fish >/dev/null 2>&1 &
 
 client_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$client_id")
+if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
@@ -39,6 +39,7 @@ fi
 sleep 10
 if (grep -Fq "Bought product Fish" client.log) && (grep -Fq "Restocking" server.log)
 then
+    echo "Buyer successfully bought the fish. Seller successfully restocked."
     echo "Test case 1 passed."
 else
     echo "Test case 1 failed."
@@ -52,25 +53,26 @@ sleep 2
 echo "Running test case 2. Seller sells only Boars. Buyer buys only Fishes"
 rm *.log*  >/dev/null 2>&1 || echo "No logs to delete"
 echo "Running the server as the seller of Boars"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 src/config-milestone1.properties Boars 5 &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 src/config-milestone1.properties Boars 5 >/dev/null 2>&1 &
 
 server_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$server_id")
+if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
 echo "Running the client as a buyer of Fishes"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 src/config-milestone1.properties Fish &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 src/config-milestone1.properties Fish >/dev/null 2>&1 &
 
 client_id=$!
-if ! (ps | grep "java" | grep "$client_id")
+if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
 then
 	echo "Failed to start the client node" && return 1
 fi
 sleep 3
 if grep -Fq "Could not buy product Fish" client.log
 then
+    echo "Buyer could not buy the fish since the seller only sells Boars."
     echo "Test case 2 passed."
 else
     echo "Test case 2 Failed."
@@ -92,26 +94,27 @@ else
 fi
 rm *.log*  >/dev/null 2>&1 || echo "No logs to delete"
 echo "Running Node $id as Seller of Fishes."
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server $id  src/config-milestone1.properties Fish 5 &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server $id  src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
 
 server_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$server_id")
+if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
   then
       echo "Failed to start the server node" && return 1
 fi
 
 echo "Running Node $id2 as a Buyer of Fishes."
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client $id2 src/config-milestone1.properties Fish 5 &
+java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client $id2 src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
 
 client_id=$!
-if ! (ps | grep "java" | grep "$client_id")
+if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
   then
       echo "Failed to start the client node" && return 1
 fi
 sleep 15
 if (grep -Fq "Bought product Fish" client.log) && (grep -Fq "Restocking" server.log)
 then
+    echo "Randomly assigned Buyer successfully bought the fish. Seller successfully restocked."
     echo "Test case 3 Passed."
 else
     echo "Test case 3 Failed."

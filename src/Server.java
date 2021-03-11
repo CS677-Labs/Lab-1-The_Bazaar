@@ -107,7 +107,7 @@ public class Server {
             // This block configure the logger with handler and formatter
             fh = new FileHandler("server.log", true);
             logger.addHandler(fh);
-            SimpleFormatter formatter = new SimpleFormatter();
+            MyLogFormatter formatter = new MyLogFormatter(ID);
             fh.setFormatter(formatter);
             // the following statement is used to log any messages
         } catch (SecurityException | IOException exception) {
@@ -146,5 +146,6 @@ public class Server {
         serverThread.start();
         System.err.printf("Hi. I am node %d running as a seller. I got %d number of product %s to sell." +
                 " Hit me up!\n", ID, Seller.maxProductCount, Seller.productName);
+
     }
 }

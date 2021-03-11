@@ -1,16 +1,14 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import java.util.stream.Collectors;
-
 
 public class Client {
     public static Logger logger;
+
 
     private Client() {}
 
@@ -18,16 +16,14 @@ public class Client {
         int id = Integer.parseInt(args[0]);
         String configFilePath = args[1];
         String[] products = args[2].split(",");
-        System.setProperty("java.util.logging.SimpleFormatter.format",
-                "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
         logger = Logger.getLogger("ClientLog");
         FileHandler fh;
         try {
             // This block configure the logger with handler and formatter
             fh = new FileHandler("client.log", true);
-            logger.addHandler(fh);
-            SimpleFormatter formatter = new SimpleFormatter();
+            MyLogFormatter formatter = new MyLogFormatter(id);
             fh.setFormatter(formatter);
+            logger.addHandler(fh);
             // the following statement is used to log any messages
         } catch (SecurityException | IOException exception) {
             exception.printStackTrace();
@@ -40,9 +36,16 @@ public class Client {
             // load a properties file
             prop.load(input);
             for (Map.Entry<Object, Object> entry : prop.entrySet()) {
-                Nodes.nodes.put(Integer.parseInt((String)entry.getKey()), (String) entry.getValue());
-            }
+                Integer key = Integer.parseInt((String) entry.getKey());
+                String value = (String) entry.getValue();
+                String[] URLandNeighbors = value.split(",");
+                Nodes.nodes.put(key, URLandNeighbors[0]);
 
+                if(key == id) {
+                    for (int i = 1; i < URLandNeighbors.length; i++)
+                        Nodes.neighbors.add(Integer.parseInt(URLandNeighbors[i]));
+                }
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
             throw ex;

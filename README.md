@@ -16,6 +16,19 @@ Unstructured Peer to Peer system for online bazaar
     - Reply.java has the reply message class.
     - SellerNode.java is the interface for the remote object.
 
+### Generate config file for N nodes and K neighbors
+    - User can utilize generateConfigFile.py script to generate the config file which can later be used to initiate buyer and seller nodes.
+    - This script takes 3 inputs.
+        1) Total number of nodes, N.
+        2) Neighbors for each node, K.
+        3) A driver file with key, value pairs which specify the URL of all the N nodes. The key here will be the node number and the value will be the URL.
+           Example contents of the driver file is :
+           0=http://127.0.0.1:5000
+           1=http://127.0.0.1:5001
+           2=http://127.0.0.1:5002
+           3=http://127.0.0.1:5003
+           4=http://127.0.0.1:5004
+         
 ### Run testcases for Milestone 1
 ```shell
 chmod 744 test_cases.sh

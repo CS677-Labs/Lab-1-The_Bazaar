@@ -1,5 +1,5 @@
 # Script to generate config file given details of N nodes and value of K (number of neighbors)
-# Will take N and K and a driver file with key value pairs as inputs
+# Will take N and K and a driver file with key value pairs as inputs. Note: The nodes are 0-indexed.
 # Will write the generated output to a config file
 # Example contents of a driver file :
 # 0=http://127.0.0.1:5000
@@ -8,10 +8,21 @@
 # 3=http://127.0.0.1:5003
 # 4=http://127.0.0.1:5004
 
+# Sample output for N=5 and K=2 with the above driver file.
+# 0=http://127.0.0.1:5000,1,4
+# 1=http://127.0.0.1:5001,2,0
+# 2=http://127.0.0.1:5002,3,1
+# 3=http://127.0.0.1:5003,4,2
+# 4=http://127.0.0.1:5004,0,3
+
+
 from array import *
 from random import *
 
 def createNetwork(N, K) :
+    if K>=N:
+        raise ValueError('K must be less than N')
+
     neighbors = []
     for i in range(N) :
         neighborsOfi = []
@@ -27,7 +38,7 @@ def createNetwork(N, K) :
             randomNeighbor = randrange(N)
             numTries = 0
             while len(neighbors[randomNeighbor]) > i or (randomNeighbor in neighbors[node] or randomNeighbor == node) and numTries < 2*N :
-            # If the randomly generated neighbor already has i neighbors  
+            # If the randomly generated neighbor already has at least i+1 neighbors
                 randomNeighbor = randrange(N)
                 numTries += 1
 

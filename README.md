@@ -31,14 +31,14 @@ Unstructured Peer to Peer system for online bazaar
          
 ### Run testcases for Milestone 1
 ```shell
-chmod 744 test_cases.sh
-./test_cases.sh
+chmod 744 TestCasesMilestone1.sh
+./TestCasesMilestone1.sh
 ```
 
 ### Run testcases for Milestone 2
 ```shell
-chmod 744 test_cases_2.sh
-./test_cases_2.sh
+chmod 744 TestCasesMilestone2.sh
+./TestCasesMilestone2.sh
 ```
 
 ### Usage

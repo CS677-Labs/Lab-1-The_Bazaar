@@ -105,7 +105,7 @@ public class Server {
         FileHandler fh;
         try {
             // This block configure the logger with handler and formatter
-            fh = new FileHandler("server.log", true);
+            fh = new FileHandler(String.format("Node_%d_server.log", ID), true);
             logger.addHandler(fh);
             MyLogFormatter formatter = new MyLogFormatter(ID);
             fh.setFormatter(formatter);

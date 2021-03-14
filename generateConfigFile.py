@@ -17,6 +17,13 @@
 #                       http://172.123.323.23
 #
 #       config-file - Full path to the config file that is to be generated
+#
+# Sample output for N=5 and K=2 with the above driver file.
+# 0=http://127.0.0.1:5000,1,4
+# 1=http://172.2.3.4:5001,2,0
+# 2=http://172.123.323.23:5002,3,1
+# 3=http://127.0.0.1:5003,4,2
+# 4=http://172.2.3.4:5004,0,3
 
 
 from array import *
@@ -24,6 +31,9 @@ from random import *
 import sys
 
 def createNetwork(N, K) :
+    if K>=N:
+        raise ValueError('K must be less than N')
+
     neighbors = []
     for i in range(N) :
         neighborsOfi = []
@@ -39,7 +49,7 @@ def createNetwork(N, K) :
             randomNeighbor = randrange(N)
             numTries = 0
             while len(neighbors[randomNeighbor]) > i or (randomNeighbor in neighbors[node] or randomNeighbor == node) and numTries < 2*N :
-            # If the randomly generated neighbor already has i neighbors  
+            # If the randomly generated neighbor already has at least i+1 neighbors
                 randomNeighbor = randrange(N)
                 numTries += 1
 

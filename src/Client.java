@@ -20,7 +20,7 @@ public class Client {
         FileHandler fh;
         try {
             // This block configure the logger with handler and formatter
-            fh = new FileHandler("client.log", true);
+            fh = new FileHandler(String.format("Node_%d_client.log", id), true);
             MyLogFormatter formatter = new MyLogFormatter(id);
             fh.setFormatter(formatter);
             logger.addHandler(fh);

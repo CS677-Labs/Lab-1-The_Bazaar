@@ -1,15 +1,27 @@
 # Script to generate config file given details of N nodes and value of K (number of neighbors)
-# Will take N and K and a driver file with key value pairs as inputs
-# Will write the generated output to a config file
-# Example contents of a driver file :
-# 0=http://127.0.0.1:5000
-# 1=http://127.0.0.1:5001
-# 2=http://127.0.0.1:5002
-# 3=http://127.0.0.1:5003
-# 4=http://127.0.0.1:5004
+#
+# Will take the values of N, K driver-file, and config-file as input in the command line args
+#
+# Usage - python generateConfigFile.py <N> <K> <driver-path> <config-path>
+# Example - python generateConfigFile.py 10 4 /tmp/driverFile /tmp/config.properties
+#   
+# Params :
+#       N - Number of nodes
+#       K - Number of neighbors per node
+#       driver-file -   Full path of the driver file.
+#                       The driver file is a file with the IPs of the machines to be used as input
+#                       Will write the generated output to a config file
+#                       Example contents of a river file :
+#                       http://127.0.0.1
+#                       http://172.2.3.4
+#                       http://172.123.323.23
+#
+#       config-file - Full path to the config file that is to be generated
+
 
 from array import *
 from random import *
+import sys
 
 def createNetwork(N, K) :
     neighbors = []
@@ -37,19 +49,37 @@ def createNetwork(N, K) :
 
     return neighbors
 
+N = int(sys.argv[1])
+K = int(sys.argv[2])
+configFilePath = sys.argv[3]
+newConfigFilePath = sys.argv[4]
 
-N = int(input("Enter the number of Nodes (N) : "))
-configFilePath = input("\n\nEnter the path to the driver file that contains details of all {N} nodes.\nThis file should contain {N} lines and each line should be of the type <NodeNum>=<URL:Port> : ".format(N = N))
-K = int(input("\n\nEnter the number of neighbors (K) : "))
 neighbors = createNetwork(N, K)
-newConfigFilePath = str(N) + "_nodes_" + str(K) + "_neighbors__Config.properties"
-with open(newConfigFilePath, 'w') as outputFile, open(configFilePath, 'r') as inputFile :
+machines = []
+with open(configFilePath, 'r') as inputFile :
     for line in inputFile :
-        newLine = line.strip('\n')
-        nodeNum = int(newLine.split("=")[0])
-        for neighbor in neighbors[nodeNum] :
-            newLine = newLine + "," + str(neighbor)
-        newLine = newLine + "\n"
-        outputFile.write(newLine)
+        lineWithoutSpaces = line.strip()
+        if len(lineWithoutSpaces) < 9 :
+            continue
+
+        if lineWithoutSpaces.find("http") == -1 :
+            lineWithoutSpaces = "http://" + lineWithoutSpaces
+
+        while lineWithoutSpaces.rfind("/") == (len(lineWithoutSpaces) - 1) :
+            lineWithoutSpaces = lineWithoutSpaces[:-1]
+        
+        machines.append(lineWithoutSpaces)
+        
+m = 0
+port = 5000
+with open(newConfigFilePath, 'w') as outputFile :
+    for i in range(N) :
+        line = str(i) + "=" + machines[m] + ":" + str(port)
+        for neighbor in neighbors[i] :
+            line = line + "," + str(neighbor)
+        line = line + "\n"
+        outputFile.write(line)
+        port += 1
+        m = (m + 1) % len(machines)
 
 print("Config file " + newConfigFilePath + " generated.")

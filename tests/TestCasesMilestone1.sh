@@ -18,7 +18,7 @@ rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
 
 echo "Running the server as the seller of Fishes"
 
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
+java -classpath classfiles  -Djava.rmi.server.codebase=file:classfiles/ Server 1 ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
 
 server_id=$!
 sleep 3
@@ -36,7 +36,7 @@ then
 	echo "Failed to start the seller node" && return 1
 fi
 
-sleep 10
+sleep 70
 if (grep -Fq "Bought product Fish" *client.log) && (grep -Fq "Restocking" *server.log)
 then
     echo "Buyer successfully bought the fish. Seller successfully restocked."
@@ -65,18 +65,19 @@ echo "Running the client as a buyer of Fishes"
 java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 
 client_id=$!
+sleep 3
 if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
 then
 	echo "Failed to start the client node" && return 1
 fi
 sleep 3
-if grep -Fq "Could not buy product Fish" *client.log
+if grep -Fq "Bought product Fish" *client.log
 then
-    echo "Buyer could not buy the fish since the seller only sells Boars."
-    echo "Test case 2 passed."
-else
     echo "Test case 2 Failed."
     return 1
+else
+    echo "Buyer could not buy the fish since the seller only sells Boars."
+    echo "Test case 2 passed."
 fi
 kill $server_id $client_id >/dev/null 2>&1 || echo "No processes to delete."
 sleep 2
@@ -107,11 +108,12 @@ echo "Running Node $id2 as a Buyer of Fishes."
 java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client $id2 ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
 
 client_id=$!
+sleep 3
 if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
   then
       echo "Failed to start the client node" && return 1
 fi
-sleep 15
+sleep 70
 if (grep -Fq "Bought product Fish" *client.log) && (grep -Fq "Restocking" *server.log)
 then
     echo "Randomly assigned Buyer successfully bought the fish. Seller successfully restocked."

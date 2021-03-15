@@ -52,28 +52,31 @@ class ServerThread implements Runnable {
 }
 
 class ServerRMI implements SellerNode {
-
-
     public ServerRMI() {
 
     }
 
-    public ArrayList<Reply> floodLookUps(String itemName, int maxHopCount, String lookupId) {
+    public void floodLookUps(String itemName, int maxHopCount, String lookupId, Stack<Integer> path) {
         System.out.printf("Looking up product %s\n", itemName);
-        ArrayList<Reply> replies = new ArrayList<>();;
         Lookup lookup = new Lookup(Server.ID, Seller.productName);
         try {
-            replies = lookup.floodLookUps(itemName, maxHopCount, lookupId);
+            lookup.floodLookUps(itemName, maxHopCount, lookupId, path);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return replies;
+        return ;
     }
 
     public boolean sellProduct(String itemName) {
-        System.out.printf("Selling product %s\n", itemName);
+        Server.logger.info(String.format("Selling product %s\n", itemName));
         return Seller.sellProduct(itemName);
     }
+
+	@Override
+	public void sendReplyBackToBuyer(Stack<Integer> pathToTraverse, ReplyMessage messageToSend) {
+        Reply reply = new Reply(pathToTraverse, messageToSend);
+        reply.sendReplyBackToBuyer();
+	}
 }
 
 public class Server {
@@ -97,9 +100,6 @@ public class Server {
             System.err.println("Incorrect arguments. Usage java -c destination Server {id} {pathToConfig} {products to sell separated by ,} {maxCount} {[optional] products to restock separated by ,}");
             throw e;
         }
-
-        System.setProperty("java.util.logging.SimpleFormatter.format",
-                "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
 
         logger = Logger.getLogger("ServerLog");
         FileHandler fh;

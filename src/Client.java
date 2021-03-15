@@ -4,11 +4,10 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 public class Client {
     public static Logger logger;
-
+    public static Buyer buyer;
 
     private Client() {}
 
@@ -29,7 +28,8 @@ public class Client {
             exception.printStackTrace();
             System.out.println("Failed to setup logging.");
         }
-        Buyer.setProducts(products);
+        buyer = new Buyer(id);
+        buyer.setProducts(products);
         Properties prop;
         try (InputStream input = new FileInputStream(configFilePath)) {
             prop = new Properties();
@@ -52,52 +52,29 @@ public class Client {
         }
         ServerThread serverThread = new ServerThread(id);
         serverThread.start();
-        for (int i =0; i< 10; i++){
-            try
-            {
+        while(true){
+            try {
+                System.out.println("Sleeping for two seconds......");
                 Thread.sleep(2000);
-                System.out.println("Sleeping for two seconds......\n--------------------------");
-
             }
             catch(InterruptedException ex)
             {
                 Thread.currentThread().interrupt();
             }
-            String productName = Buyer.pickProduct();
 
-            System.out.printf("--------------------------------\nBuying product %s\n", productName);
+            String productName = buyer.pickProduct();
+            System.out.println(String.format("Sending lookup request for product %s", productName));
+            
             // Passing productName as empty string because a buyer doesn't sell any product.
             // Lookup is used by the server nodes too where they pass the product name they sell to this.
             Lookup lookup = new Lookup(id, "");
-            ArrayList<Reply> replies;
+
             try{
-                replies = lookup.lookup(productName, 2);
+                lookup.lookup(productName, 10);
             } catch (Exception e){
                 e.printStackTrace();
                 throw e;
             }
-            List<Integer> idList = replies.stream().map(p -> p.sellerId).collect(Collectors.toList());
-            logger.info(String.format("Obtained replies from nodes %s", idList.toString()));
-
-            Reply sellerPicked;
-            if(!replies.isEmpty()) {
-                Buyer buyer = new Buyer(id, productName);
-                sellerPicked = buyer.pickSeller(replies);
-                logger.info(String.format("Randomly picking %d as the seller and contacting it directly.", sellerPicked.sellerId));
-                if(buyer.buy(sellerPicked.sellerId)){
-                    logger.info(String.format("Bought product %s from Peer ID %d\n", productName, sellerPicked.sellerId));
-                }
-                else{
-                    System.out.printf("Failed to buy product %s from Peer ID %d\n", productName, sellerPicked.sellerId);
-
-                }
-            }
-            else{
-                logger.info(String.format("Could not buy product %s because found no peers with that item\n", productName));
-            }
-
         }
-
     }
-
 }

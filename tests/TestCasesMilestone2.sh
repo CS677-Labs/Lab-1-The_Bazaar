@@ -106,7 +106,7 @@ java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 
 client_id_2=$!
 java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 3 ../src/config-milestone2.properties Boar >/dev/null 2>&1 &
 client_id_3=$!
-sleep 2
+sleep 5
 if ! (ps | grep "java" | grep "$client_id_1" >/dev/null 2>&1)
 then
 	echo "Failed to start buyer 1" && return 1
@@ -124,7 +124,7 @@ fi
 
 sleep 5
 # Checking if multiple buyers (more than two) found the replies
-replies=$(grep -o 'Randomly picking' *client.log | wc -l)
+replies=$(grep -o 'Received reply from seller node' *client.log | wc -l)
 if [ "$replies" -gt 1 ]
 then
     echo "Multiple buyers received replies from the seller that has only one item."

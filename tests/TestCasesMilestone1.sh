@@ -9,26 +9,29 @@ function finish {
 }
 trap finish EXIT
 trap finish RETURN
-echo "Compiling java files."
+
+rm -rf build/*
+cp -r generateConfigFile.py build && cd build
 javac -d classfiles ../src/*.java
+echo "Generating jar file"
+jar cfe Server.jar Server -C classfiles . && jar cfe Client.jar Client -C classfiles .
+echo "Generated jar files"
 
 echo "Running test case 1 - Seller sells Fish, Buyer buys Fish."
 
 rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
 
 echo "Running the server as the seller of Fishes"
-
-java -classpath classfiles  -Djava.rmi.server.codebase=file:classfiles/ Server 1 ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
-
+java -Djava.rmi.server.codebase=file:/ -jar Server.jar 1 ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
 server_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
-echo "Running the client as a buyer of Fishes"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 
+echo "Running the client as a buyer of Fishes"
+java -jar Client.jar 2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 client_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
@@ -36,7 +39,9 @@ then
 	echo "Failed to start the seller node" && return 1
 fi
 
+echo "Sleeping for 70 seconds...."
 sleep 70
+
 if (grep -Fq "Bought product Fish" *client.log) && (grep -Fq "Restocking" *server.log)
 then
     echo "Buyer successfully bought the fish. Seller successfully restocked."
@@ -53,17 +58,16 @@ sleep 2
 echo "Running test case 2. Seller sells only Boars. Buyer buys only Fishes"
 rm *.log*  >/dev/null 2>&1 || echo "No logs to delete"
 echo "Running the server as the seller of Boars"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server 1 ../src/config-milestone1.properties Boars 5 >/dev/null 2>&1 &
-
+java -Djava.rmi.server.codebase=file:/ -jar Server.jar 1 ../src/config-milestone1.properties Boars 5 >/dev/null 2>&1 &
 server_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
-echo "Running the client as a buyer of Fishes"
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client 2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 
+echo "Running the client as a buyer of Fishes"
+java -jar Client.jar 2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 client_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
@@ -71,6 +75,7 @@ then
 	echo "Failed to start the client node" && return 1
 fi
 sleep 3
+
 if grep -Fq "Bought product Fish" *client.log
 then
     echo "Test case 2 Failed."
@@ -95,7 +100,7 @@ else
 fi
 rm *.log*  >/dev/null 2>&1 || echo "No logs to delete"
 echo "Running Node $id as Seller of Fishes."
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Server $id  ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
+java -Djava.rmi.server.codebase=file:/ -jar Server.jar $id ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
 
 server_id=$!
 sleep 3
@@ -105,14 +110,15 @@ if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
 fi
 
 echo "Running Node $id2 as a Buyer of Fishes."
-java -classpath classfiles -Djava.rmi.server.codebase=file:classfiles/ Client $id2 ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
-
+java -jar Client.jar $id2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 client_id=$!
 sleep 3
 if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
   then
       echo "Failed to start the client node" && return 1
 fi
+
+echo "Sleeping for 70 seconds....."
 sleep 70
 if (grep -Fq "Bought product Fish" *client.log) && (grep -Fq "Restocking" *server.log)
 then

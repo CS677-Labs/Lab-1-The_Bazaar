@@ -1,10 +1,2 @@
-Node Id 1---->Mar 13,2021 21:50 Obtained replies from nodes [5]
-Node Id 1---->Mar 13,2021 21:50 Randomly picking 5 as the seller and contacting it directly.
-Node Id 1---->Mar 13,2021 21:50 Bought product Boar from Peer ID 5
-
-Node Id 1---->Mar 13,2021 21:51 Obtained replies from nodes []
-Node Id 1---->Mar 13,2021 21:51 Could not buy product Boar because found no peers with that item
-
-Node Id 1---->Mar 13,2021 21:51 Obtained replies from nodes []
-Node Id 1---->Mar 13,2021 21:51 Could not buy product Boar because found no peers with that item
-
+Node Id 1---->Mar 17,2021 12:47 Received reply from seller node 5. Contacting it directly
+Node Id 1---->Mar 17,2021 12:47 Did not get a reply for the lookup request of Boar. Timing out and ignoring future replies for this request

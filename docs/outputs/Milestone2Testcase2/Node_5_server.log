@@ -1,2 +1,14 @@
-Node Id 5---->Mar 13,2021 21:50 Restocking the product with Fish
-Node Id 5---->Mar 13,2021 21:50 Restocking the product with Fish
+Node Id 5---->Mar 17,2021 12:47 Buyer [2] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:47 Buyer [3] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:47 Buyer [1] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:47 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:47 Acquired lock
+Node Id 5---->Mar 17,2021 12:47 Current count of product Boar is 1
+Node Id 5---->Mar 17,2021 12:47 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:47 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:47 Restocking the product with Fish
+Node Id 5---->Mar 17,2021 12:47 Count after buy is 1
+Node Id 5---->Mar 17,2021 12:47 Released lock

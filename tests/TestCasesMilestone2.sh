@@ -6,7 +6,7 @@ function finish {
   rm -rf build/*
   kill $server_id $server_id_2 $client_id_1 $client_id_2 $client_id_3 >/dev/null 2>&1 || echo "No processes to delete."
   rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
-
+  rm -rf build/* >/dev/null 2>&1
 }
 trap finish EXIT
 trap finish RETURN

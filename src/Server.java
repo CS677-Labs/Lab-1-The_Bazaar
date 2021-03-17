@@ -34,7 +34,7 @@ class ServerThread implements Runnable {
         try {
             ServerRMI obj = new ServerRMI();
             SellerNode stub = (SellerNode) UnicastRemoteObject.exportObject(obj, 0);
-
+            System.setProperty("java.rmi.server.hostname", new URL(this.url).getHost());
             Registry registry = LocateRegistry.createRegistry(port);
             registry.bind("SellerNode", stub);
         } catch (Exception e) {

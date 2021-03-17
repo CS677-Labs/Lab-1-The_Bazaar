@@ -18,7 +18,7 @@ function finish {
 #    id=${line[0]}
 #    ssh root@$id "kill ${pids[id]}" || echo "Failed to kill process $i."
 #  done < "config-milestone3.properties"
-
+  rm -rf build/* >/dev/null 2>&1
   rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
 }
 trap finish EXIT
@@ -27,7 +27,7 @@ trap finish RETURN
 #
 
 echo "Compiling java files."
-rm -rf build
+rm -rf build/*
 cp -r generateConfigFile.py build && cd build
 javac -d classfiles ../src/*.java
 echo "Generating jar file"

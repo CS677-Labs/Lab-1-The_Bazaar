@@ -64,9 +64,11 @@ public class Lookup {
             Fetch the neighbors and flood lookups to all the neighbors.
              */
             path.push(nodeId);
+            URL current_url = new URL(Nodes.nodes.get(this.nodeId));
             for (Integer ID : Nodes.neighbors) {
                 URL url = new URL(Nodes.nodes.get(ID));
-                System.out.println("Forwarding request to " + url.toString());
+                if(url.getHost().equals(current_url.getHost()))
+                    url = new URL(url.getProtocol(), "127.0.0.1", url.getPort(), url.getFile());
                 try {
                     Registry registry = LocateRegistry.getRegistry(url.getHost(), url.getPort());
                     SellerNode seller = (SellerNode) registry.lookup("SellerNode");

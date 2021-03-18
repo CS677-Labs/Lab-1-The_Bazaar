@@ -1,3 +1,79 @@
-Node Id 5---->Mar 13,2021 21:49 Restocking the product with Boar
-Node Id 5---->Mar 13,2021 21:49 Restocking the product with Boar
-Node Id 5---->Mar 13,2021 21:49 Restocking the product with Boar
+Node Id 5---->Mar 17,2021 12:46 Buyer [1] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 5
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 4
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [2] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 4
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 3
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [3] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 3
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 2
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [1] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 2
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 1
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [2] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 1
+Node Id 5---->Mar 17,2021 12:46 Restocking the product with Boar
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 5
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [3] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 5
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 4
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [1] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 4
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 3
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [2] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 3
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 2
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [3] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 2
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 1
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [1] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 1
+Node Id 5---->Mar 17,2021 12:46 Restocking the product with Boar
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 5
+Node Id 5---->Mar 17,2021 12:46 Released lock
+Node Id 5---->Mar 17,2021 12:46 Buyer [2] is looking to buy [Boar]. Will send a reply to that buyer.
+Node Id 5---->Mar 17,2021 12:46 Selling product Boar
+
+Node Id 5---->Mar 17,2021 12:46 Acquired lock
+Node Id 5---->Mar 17,2021 12:46 Current count of product Boar is 5
+Node Id 5---->Mar 17,2021 12:46 Count after buy is 4
+Node Id 5---->Mar 17,2021 12:46 Released lock

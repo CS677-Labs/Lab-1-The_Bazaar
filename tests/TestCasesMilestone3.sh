@@ -14,14 +14,17 @@ function finish {
 #  # For remote cleanup
   while IFS= read -r line
   do
-    newline=(${line//=/ })
-    id=${newline[0]}
-    network=(${newline[1]//,/ })
-    url=(${network[0]//:/ })
-    ip="${url[0]}:${url[1]}"
-    fullurl=$ip
-    ip=$(echo "$fullurl" |sed 's/https\?:\/\///')
-    ssh -n ec2-user@"$ip" "kill ${pids[id]}" || echo "Failed to kill process $i."
+    if [[ "$ip" != *"http://localhost" ]] && [[ "$ip" != *"http://127.0.0.1" ]]
+    then
+      newline=(${line//=/ })
+      id=${newline[0]}
+      network=(${newline[1]//,/ })
+      url=(${network[0]//:/ })
+      ip="${url[0]}:${url[1]}"
+      fullurl=$ip
+      ip=$(echo "$fullurl" |sed 's/https\?:\/\///')
+      ssh -n ec2-user@"$ip" "kill ${pids[id]}" || echo "Failed to kill process $i."
+    fi
   done < "config-milestone3.properties"
   rm -rf build/* >/dev/null 2>&1
   rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
@@ -62,8 +65,8 @@ do
     java -Djava.rmi.server.codebase=file:/ -jar ${role}.jar $id config-milestone3.properties Fish 2 >/dev/null 2>&1 &
     pid=$!
     sleep 3
-    ps | grep "java" | grep "$pid" | grep -v grep >/dev/null 2>&1
-    status=$?
+    status=0
+    ps | grep "java" | grep "$pid" | grep -v grep >/dev/null 2>&1 || status=$?
     local_pids[id]=$pid
   else
     fullurl=$ip
@@ -103,7 +106,7 @@ do
     if [[ "$ip" == *"localhost" ]] || [[ "$ip" == *"127.0.0.1" ]]
     then
       # Todo: Check for the particular log file for this id.
-      grep -Fq "Bought product Fish" Node_${id}_client.log* || echo "Buyer with id $id did not buy the product."
+      grep -Fq "Bought product Fish" Node_${id}_client.log* && clientSuccess=1 || echo "Buyer with id $id did not buy the product."
     else
       fullurl=$ip
       ip=$(echo "$fullurl" |sed 's/https\?:\/\///')
@@ -112,7 +115,7 @@ do
   else
     if [[ "$ip" == *"localhost" ]] || [[ "$ip" == *"127.0.0.1" ]]
     then
-      grep -Fq "Restocking" Node_${id}_server.log* || echo "Seller with ID $id did not restock"
+      grep -Fq "Restocking" Node_${id}_server.log* && sellerSuccess=1 || echo "Seller with ID $id did not restock"
     else
       fullurl=$ip
       ip=$(echo "$fullurl" |sed 's/https\?:\/\///')

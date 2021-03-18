@@ -25,7 +25,7 @@ echo "Running 1 server as the seller of Boars"
 java -Djava.rmi.server.codebase=file:/ -jar Server.jar 5 ../src/config-milestone2.properties Boar 5 >/dev/null 2>&1 &
 server_id=$!
 sleep 2
-if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$server_id" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
@@ -34,7 +34,7 @@ echo "Running 1 server as seller of Fish (Note: The seller of fish has no role i
 java -Djava.rmi.server.codebase=file:/ -jar Server.jar 4 ../src/config-milestone2.properties Fish 1 >/dev/null 2>&1 &
 server_id_2=$!
 sleep 2
-if ! (ps | grep "java" | grep "$server_id_2" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$server_id_2" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the server node" && return 1
 fi
@@ -43,14 +43,14 @@ echo "Running 3 clients as buyers of Boars"
 java -jar Client.jar 1 ../src/config-milestone2.properties Boar >/dev/null 2>&1 &
 client_id_1=$!
 sleep 1
-if ! (ps | grep "java" | grep "$client_id_1" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id_1" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the client node" && return 1
 fi
 java -jar Client.jar 2 ../src/config-milestone2.properties Boar >/dev/null 2>&1 &
 client_id_2=$!
 sleep 1
-if ! (ps | grep "java" | grep "$client_id_2" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id_2" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the client node" && return 1
 fi
@@ -58,7 +58,7 @@ fi
 java -jar Client.jar 3 ../src/config-milestone2.properties Boar >/dev/null 2>&1 &
 client_id_3=$!
 sleep 1
-if ! (ps | grep "java" | grep "$client_id_3" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id_3" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the client node" && return 1
 fi
@@ -87,7 +87,7 @@ echo "Running 1 server as the seller of Boars"
 java -Djava.rmi.server.codebase=file:/ -jar Server.jar 5 ../src/config-milestone2.properties Boar 1 Fish >/dev/null 2>&1 &
 server_id=$!
 sleep 2
-if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$server_id" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
@@ -96,7 +96,7 @@ echo "Running 1 server as seller of Fish (Note: The seller of fish has no role i
 java -Djava.rmi.server.codebase=file:/ -jar Server.jar 4 ../src/config-milestone2.properties Fish 1 >/dev/null 2>&1 &
 server_id_2=$!
 sleep 2
-if ! (ps | grep "java" | grep "$server_id_2" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$server_id_2" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the no-role node" && return 1
 fi
@@ -109,17 +109,17 @@ client_id_2=$!
 java -jar Client.jar 3 ../src/config-milestone2.properties Boar >/dev/null 2>&1 &
 client_id_3=$!
 sleep 5
-if ! (ps | grep "java" | grep "$client_id_1" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id_1" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start buyer 1" && return 1
 fi
 
-if ! (ps | grep "java" | grep "$client_id_2" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id_2" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start buyer 2" && return 1
 fi
 
-if ! (ps | grep "java" | grep "$client_id_3" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id_3" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start buyer 3" && return 1
 fi

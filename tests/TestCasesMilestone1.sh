@@ -26,7 +26,7 @@ echo "Running the server as the seller of Fishes"
 java -Djava.rmi.server.codebase=file:/ -jar Server.jar 1 ../src/config-milestone1.properties Fish 5 >/dev/null 2>&1 &
 server_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$server_id" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
@@ -35,7 +35,7 @@ echo "Running the client as a buyer of Fishes"
 java -jar Client.jar 2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 client_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
@@ -62,7 +62,7 @@ echo "Running the server as the seller of Boars"
 java -Djava.rmi.server.codebase=file:/ -jar Server.jar 1 ../src/config-milestone1.properties Boars 5 >/dev/null 2>&1 &
 server_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$server_id" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the seller node" && return 1
 fi
@@ -71,7 +71,7 @@ echo "Running the client as a buyer of Fishes"
 java -jar Client.jar 2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 client_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id" | grep -v grep >/dev/null 2>&1)
 then
 	echo "Failed to start the client node" && return 1
 fi
@@ -105,7 +105,7 @@ java -Djava.rmi.server.codebase=file:/ -jar Server.jar $id ../src/config-milesto
 
 server_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$server_id" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$server_id" | grep -v grep >/dev/null 2>&1)
   then
       echo "Failed to start the server node" && return 1
 fi
@@ -114,7 +114,7 @@ echo "Running Node $id2 as a Buyer of Fishes."
 java -jar Client.jar $id2 ../src/config-milestone1.properties Fish >/dev/null 2>&1 &
 client_id=$!
 sleep 3
-if ! (ps | grep "java" | grep "$client_id" >/dev/null 2>&1)
+if ! (ps | grep "java" | grep "$client_id" | grep -v grep >/dev/null 2>&1)
   then
       echo "Failed to start the client node" && return 1
 fi

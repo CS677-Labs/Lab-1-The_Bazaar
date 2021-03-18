@@ -21,7 +21,7 @@ function finish {
     ip="${url[0]}:${url[1]}"
     fullurl=$ip
     ip=$(echo "$fullurl" |sed 's/https\?:\/\///')
-    ssh -n "$ip" "kill ${pids[id]}" || echo "Failed to kill process $i."
+    ssh -n ec2-user@"$ip" "kill ${pids[id]}" || echo "Failed to kill process $i."
   done < "config-milestone3.properties"
   rm -rf build/* >/dev/null 2>&1
   rm *.log* >/dev/null 2>&1 || echo "No logs to delete"
@@ -70,14 +70,14 @@ do
     ip=$(echo "$fullurl" |sed 's/https\?:\/\///')
     echo "Running role $role on remote machine $ip."
     dir[id]="temp_$id"
-    ssh -n "$ip" "rm -rf temp_$id && mkdir temp_$id && git clone https://github.com/CS677-Labs/Lab-1-The_Bazaar.git || echo "Repo already present" && cd Lab-1-The_Bazaar && javac -d classfiles src/*.java && jar cfe Server.jar Server -C classfiles . && jar cfe Client.jar Client -C classfiles . && cp *.jar ../temp_$id"
+    ssh -n ec2-user@"$ip" "rm -rf temp_$id && mkdir temp_$id && git clone https://github.com/CS677-Labs/Lab-1-The_Bazaar.git || echo "Repo already present" && cd Lab-1-The_Bazaar && javac -d classfiles src/*.java && jar cfe Server.jar Server -C classfiles . && jar cfe Client.jar Client -C classfiles . && cp *.jar ../temp_$id"
     # Ensure there is at least one seller and one buyer in the system.
-    scp "config-milestone3.properties" "$ip":"temp_$id"
+    scp "config-milestone3.properties" ec2-user@"$ip":"temp_$id"
     # Todo: Run command differently for buyer and server.
-    pid=$(ssh -n $ip "cd temp_$id && (java -Djava.rmi.server.codebase=file:/ -jar ${role}.jar $id config-milestone3.properties Fish 2 >/dev/null 2>&1 & echo \$!)")
+    pid=$(ssh -n ec2-user@$ip "cd temp_$id && (java -Djava.rmi.server.codebase=file:/ -jar ${role}.jar $id config-milestone3.properties Fish 2 >/dev/null 2>&1 & echo \$!)")
     sleep 2
     status=0
-    ssh -n "$ip" "ps -ef | grep java | grep $pid | grep -v grep" || status=$?
+    ssh -n ec2-user@"$ip" "ps -ef | grep java | grep $pid | grep -v grep" || status=$?
     pids[id]=$pid
   fi
   if [[ "$status" != 0 ]]
@@ -107,7 +107,7 @@ do
     else
       fullurl=$ip
       ip=$(echo "$fullurl" |sed 's/https\?:\/\///')
-      ssh -n "$ip" "cd ${dir[id]} && (grep -Fq \"Bought product Fish\" *.log)" && clientSuccess=1 || echo "Buyer with id $id did not buy the product."
+      ssh -n ec2-user@"$ip" "cd ${dir[id]} && (grep -Fq \"Bought product Fish\" *.log)" && clientSuccess=1 || echo "Buyer with id $id did not buy the product."
     fi
   else
     if [[ "$ip" == *"localhost" ]] || [[ "$ip" == *"127.0.0.1" ]]
@@ -116,7 +116,7 @@ do
     else
       fullurl=$ip
       ip=$(echo "$fullurl" |sed 's/https\?:\/\///')
-      ssh -n "$ip" "cd ${dir[id]} && grep -Fq Restocking *.log" && sellerSuccess=1 || echo "Seller with ID $id did not restock"
+      ssh -n ec2-user@"$ip" "cd ${dir[id]} && grep -Fq Restocking *.log" && sellerSuccess=1 || echo "Seller with ID $id did not restock"
     fi
   fi
 done < config-milestone3.properties

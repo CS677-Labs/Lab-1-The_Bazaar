@@ -1,0 +1,172 @@
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 5
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 4
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 4
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 3
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 3
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 2
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 2
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 1
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 1
+Node Id 1---->Mar 17,2021 12:42 Restocking the product with Fish
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 5
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 5
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 4
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 4
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 3
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 3
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 2
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 2
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 1
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:42 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:42 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:42 Acquired lock
+Node Id 1---->Mar 17,2021 12:42 Current count of product Fish is 1
+Node Id 1---->Mar 17,2021 12:42 Restocking the product with Fish
+Node Id 1---->Mar 17,2021 12:42 Count after buy is 5
+Node Id 1---->Mar 17,2021 12:42 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 5
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 4
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 4
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 3
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 3
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 2
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 2
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 1
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 1
+Node Id 1---->Mar 17,2021 12:43 Restocking the product with Fish
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 5
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 5
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 4
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 4
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 3
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 3
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 2
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 2
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 1
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 1
+Node Id 1---->Mar 17,2021 12:43 Restocking the product with Fish
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 5
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 5
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 4
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 4
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 3
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 3
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 2
+Node Id 1---->Mar 17,2021 12:43 Released lock
+Node Id 1---->Mar 17,2021 12:43 Buyer [2] is looking to buy [Fish]. Will send a reply to that buyer.
+Node Id 1---->Mar 17,2021 12:43 Selling product Fish
+
+Node Id 1---->Mar 17,2021 12:43 Acquired lock
+Node Id 1---->Mar 17,2021 12:43 Current count of product Fish is 2
+Node Id 1---->Mar 17,2021 12:43 Count after buy is 1
+Node Id 1---->Mar 17,2021 12:43 Released lock

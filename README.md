@@ -5,6 +5,7 @@ Unstructured Peer to Peer system for online bazaar
 
 - Milestone 1 - https://github.com/CS677-Labs/Lab-1-The_Bazaar/tree/milestone1
 - Milestone 2 - https://github.com/CS677-Labs/Lab-1-The_Bazaar/tree/milestone2
+- Milestone 3 - https://github.com/CS677-Labs/Lab-1-The_Bazaar/tree/milestone3
 
 ### Repo Structure
     - Server.java has the server side RMI setup code. 

@@ -31,6 +31,7 @@ The test case ends after an arbitrary interval of time when the client and serve
 The results of the test case show that the buyer continuously buys boars while the seller restocks when the last boar is sold. Hence, the seller never runs out of boars to sell to the buyer.
 
 # TestCasesMilestone2.sh
+##Configuration
 Number of peers (N): 5\
 Number of neighbors (k): 4\
 Number of machines: 1\
@@ -54,3 +55,12 @@ The test case ends after an arbitrary interval of time when the client and serve
 
 ##### Results:
 As the seller of boar has only 1 boar to sell, and it restocks a different product (fish) after the boar is sold, only one buyer gets to buy the boar even though both buyers request for the same product. Note: The two buyers receive the id of the seller of boars on a look-up. However, only one of the buyers is able to buy the boar when they attempt to buy.
+
+# TestCasesMilestone3.sh
+##Configuration
+Number of peers (N): 3\
+Number of neighbors (k): 2\
+Network: The peer-to-peer overlay network is created by assigning random k neighbors to every node.
+
+##### Description:
+A list of machine IPs are taken as input in a file. If one of the machines is localhost, the entire p2p system would run on localhost. Otherwise, the jar files are copied to the remote machine, and the script is executed on all nodes. The remote logs are used to validate the outputs. 

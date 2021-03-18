@@ -40,7 +40,7 @@ jar cfe Server.jar Server -C classfiles . && jar cfe Client.jar Client -C classf
 echo "Generated jar files"
 # Check for the argument. If it's empty then raise error asking for the file.
 
-python generateConfigFile.py 3 2 $1 config-milestone3.properties
+python3 generateConfigFile.py 3 2 ../$1 config-milestone3.properties
 
 roles[1]="Client"
 roles[0]="Server"

@@ -39,7 +39,7 @@ jar cfe Server.jar Server -C classfiles . && jar cfe Client.jar Client -C classf
 echo "Generated jar files"
 # Check for the argument. If it's empty then raise error asking for the file.
 
-python generateConfigFile.py $1 $2 $3 network-config.properties
+python3 generateConfigFile.py $1 $2 ../$3 network-config.properties
 
 roles[1]="Client"
 roles[0]="Server"
@@ -91,7 +91,7 @@ while : ; do
 read k
 if [[ "$k" == "q" ]]
 then
-  echo "\nQuitting the program\n"
+  echo "Quitting the program"
   exit
 fi
 done

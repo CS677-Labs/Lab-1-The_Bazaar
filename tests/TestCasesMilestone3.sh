@@ -4,7 +4,7 @@ mkdir -p classfiles
 function finish {
   echo "Cleanup"
   rm -rf classfiles
-  rm -rf *.jar || grep "No jars to cleanup"
+  rm -rf *.jar || echo "No jars to cleanup"
   for i in "${local_pids[@]}"
   do
    kill $i || echo "Failed to kill $i. It is probably already killed."
@@ -62,7 +62,7 @@ do
     java -Djava.rmi.server.codebase=file:/ -jar ${role}.jar $id config-milestone3.properties Fish 2 >/dev/null 2>&1 &
     pid=$!
     sleep 3
-    ps | grep "java" | grep "$pid" >/dev/null 2>&1
+    ps | grep "java" | grep "$pid" | grep -v grep >/dev/null 2>&1
     status=$?
     local_pids[id]=$pid
   else
@@ -70,20 +70,20 @@ do
     ip=$(echo "$fullurl" |sed 's/https\?:\/\///')
     echo "Running role $role on remote machine $ip."
     dir[id]="temp_$id"
-    ssh -n "$ip" "rm -rf temp_$id && mkdir temp_$id"
+    ssh -n "$ip" "rm -rf temp_$id && mkdir temp_$id && git clone https://github.com/CS677-Labs/Lab-1-The_Bazaar.git || echo "Repo already present" && cd Lab-1-The_Bazaar && javac -d classfiles src/*.java && jar cfe Server.jar Server -C classfiles . && jar cfe Client.jar Client -C classfiles . && cp *.jar ../temp_$id"
     # Ensure there is at least one seller and one buyer in the system.
-    scp ${role}.jar "config-milestone3.properties" "$ip":"temp_$id"
+    scp "config-milestone3.properties" "$ip":"temp_$id"
     # Todo: Run command differently for buyer and server.
     pid=$(ssh -n $ip "cd temp_$id && (java -Djava.rmi.server.codebase=file:/ -jar ${role}.jar $id config-milestone3.properties Fish 2 >/dev/null 2>&1 & echo \$!)")
     sleep 2
-    ssh -n "$ip" "ps -ef | grep java | grep $pid >/dev/null 2>&1"
-    status=$?
+    status=0
+    ssh -n "$ip" "ps -ef | grep java | grep $pid | grep -v grep" || status=$?
     pids[id]=$pid
   fi
-  #if [[ "$status" != 0 ]]
-  #then
-	  #echo "Failed to start the node $id with ip $ip. Exiting..." && return 1
-  #fi
+  if [[ "$status" != 0 ]]
+  then
+	  echo "Failed to start the node $id with ip $ip. Exiting..." && return 1
+  fi
 done < config-milestone3.properties
 
 sleep 10
